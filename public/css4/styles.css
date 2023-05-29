@@ -1,0 +1,135 @@
+@font-face {
+    font-family: icomoon;
+    src: url('../fonts/icomoon-webfont.woff2') format('woff2'),
+         url('../fonts/icomoon-webfont.woff') format('woff');
+     font-weight: 400;
+    font-style: normal;
+    font-display: block
+}
+
+@font-face {
+    font-family: icomoon;
+    src: url(../fonts/icomoon.ttf?edz7c9) format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: block
+}
+
+@font-face {
+    font-family: 'trebuchet';
+    src: url('../fonts/trebuc-webfont.woff2') format('woff2'),
+         url('../fonts/trebuc-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+div.main_section.login {
+    height: 100vh;
+    background: url("../images/istockphoto-524903696-170667a.jpg");
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+div.main_section.login .login_inner {
+    max-width: 400px;
+    margin: 0px auto;
+    position: relative;
+}
+div.main_section.login .form_header p {
+    font-size: 25px;
+    font-weight: 700;
+    color: darkblue;
+}
+div.main_section.login .form_body {
+    padding: 30px;
+    background: #fff;
+    box-shadow: 1px 1px 10px #ccc;
+    border-radius: 10px;
+}
+input.inputbox {
+    height: 40px;
+    width: 100%;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: none;
+    outline: none;
+}
+button.primary_btn {
+    background: #6565c8;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+}
+span.input_icon {
+    position: absolute;
+    height: 40px;
+    line-height: 40px;
+    width: 40px;
+    border-right: 1px solid #ccc;
+    color: #777;
+}
+input#login_password {
+    padding-left: 50px;
+}
+input#login_id {
+    padding-left: 50px;
+}
+.form_coll.full {
+    width: 100%;
+}
+.form_coll {
+    width: 49%;
+	position: relative;
+}
+.form_coll.left {
+    text-align: left;
+}
+.form_coll.right {
+    text-align: right;
+}
+.form_row {
+    display: flex;
+    justify-content: space-between;
+}
+div.main_section.login .form_body input[type="checkbox"]+span {
+    color: #777;
+    font-size: 14px;
+    position: relative;
+    top: -1px;
+}
+.form_coll.right a.forget_pass {
+    font-size: 14px;
+    text-decoration: none;
+    color: #6565c8;
+    font-weight: 400;
+}
+div.main_section.login button.primary_btn {
+    width: 100%;
+    height: 40px;
+    font-size: 18px;
+}
+div.main_section.login .btn_row {
+    margin-top: 5px;
+}
+div.main_section.login::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(255,255,255,0.8);
+}
+div.main_section.login .other_link {
+    margin-top: 15px;
+}
+.other_link a {
+    color: #6565c8;
+    text-decoration: none;
+    font-weight: 600;
+}
