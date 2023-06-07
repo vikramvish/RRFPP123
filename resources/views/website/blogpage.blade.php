@@ -8,7 +8,7 @@
     <title>Donation</title>
     <link href="{{ URL::asset('css1/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css1/bootstrap-icons.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('css1/styles.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css1/styles1.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css1/owl.carousel.min.css') }}" rel="stylesheet">
     <script type="text/javascript" src="{{ URL::asset('js1/jquery-3.6.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js1/popper.min.js') }}"></script>
@@ -24,26 +24,7 @@
 <body class="blog_single">
     <header>
         <div class="container">
-            <div class="custom_row">
-                <div class="logo"><img src="{{ URL::asset('/images/rajgov_logo.png') }}"></div>
-                <div class="menu">
-                    <ul>
-                        <li><a href="{{ url('/website') }}" class="home"><span class="menu_icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
-                                    data-bs-original-title="Home" aria-label="Home"><i
-                                        class="bi bi-house-heart"></i></span>Home</a></li>
-                        <li><a href="#" class="email"><span class="menu_icon" data-bs-toggle="tooltip"
-                                    data-bs-placement="bottom" title="rajGov@gmail.com"><i
-                                        class="bi bi-envelope"></i></span>rajGov@gmail.com</a></li>
-                        <li><a href="{{ url('contactus') }}" class="mobile"><span class="menu_icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Contact-Us"><i
-                                        class="bi bi-phone"></i></span>Contact-Us</a></li>
-                        <li><a href="{{ url('/Receiptt') }}" class="download"><span class="menu_icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Download Receipt"><i
-                                        class="bi bi-download"></i></span>Download Receipt</a></li>
-                    </ul>
-                </div>
-            </div>
+            @include('website.header')
         </div>
     </header>
     <div class="main_section">
@@ -60,7 +41,7 @@
                                 <li><a
                                         href="{{ url('/website') }}"style="color: #312f72;text-decoration: none;">Home</a>
                                 </li>
-                                <li>help for Humanity</li>
+                                <li> {{ $users->Heading }}</li>
                             </ul>
                         </div>
                     </div>
@@ -77,7 +58,7 @@
                             </div>
                             <div class="blog_content">
                                 <p>{{ $users->LongDescription }}</p>
-                                <a href="{{ url('website#help') }}" class="donate_btn"><span class="donate_icon"><i
+                                <a href="{{ url('paymentpage/' . $slug) }}" class="donate_btn"><span class="donate_icon"><i
                                             class="bi bi-heart-fill"></i></span> Donate Now</a>
                             </div>
                         </div>
@@ -99,7 +80,7 @@
                                                         Jaipur. In this, cash, check,dd and also online payment to help
                                                         chief minister refief
                                                         fund. </p>
-                                                    <a href="http://127.0.0.1:8000/blogpage/CMRF" class="read_more">Read
+                                                    <a href="http://172.22.36.133:8000/blogpage/CMRF" class="read_more">Read
                                                         more</a>
                                                 </div>
                                             </div>
@@ -117,7 +98,7 @@
                                                         cow and its offspring and to provide biodiversity in relation to
                                                         reproduction, breed reforms, conservation of native cow breeds
                                                         and the value addition of cow </p>
-                                                    <a href="http://127.0.0.1:8000/blogpage/Guashala"
+                                                    <a href="http://172.22.36.133:8000/blogpage/Guashala"
                                                         class="read_more">Read more</a>
                                                 </div>
                                             </div>
@@ -136,7 +117,7 @@
                                                         promotion of temple culture.Devasthan is a department of
                                                         conservation and promotion of temple culture.is a department of
                                                         conservation</p>
-                                                    <a href="http://127.0.0.1:8000/blogpage/Devsthan"
+                                                    <a href="http://172.22.36.133:8000/blogpage/Devsthan"
                                                         class="read_more">Read more</a>
                                                 </div>
                                             </div>
@@ -155,7 +136,7 @@
                                                         it. The virus that is caused by the lampy skin disease is called
                                                         Capripoxvirus. This disease occurs in cows and buffaloes. The
                                                         virus is of Gotpox and Shippox Family.</p>
-                                                    <a href="http://127.0.0.1:8000/blogpage/Lampi"
+                                                    <a href="http://172.22.36.133:8000/blogpage/Lampi"
                                                         class="read_more">Read more</a>
                                                 </div>
                                             </div>
@@ -244,22 +225,7 @@
     </div>
     </div>
     <footer>
-        <div class="footer_top">
-            <div class="container">
-                <ul class="footer_menu">
-                    <li><a href="{{ url('RefundPolicy') }}">Refund Policy</a></li>
-                    <li><a href="{{ url('TermsCondition') }}">Term & Condition</a></li>
-                    <li><a href="{{ url('PrivacyPolicy') }}">Privacy Policy</a></li>
-                    <li><a href="{{ url('CancellationPolicy') }}">Cancellation Policy</a></li>
-                    <li><a href="{{ url('ChargebackGuidelines') }}">Chargeback Guidelines</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer_bottom">
-            <div class="container">
-                <p>Copyright © 2022 - All rights reserved dept of IT&C, Govt of rajasthan </p>
-            </div>
-        </div>
+        @include('website.footer')
     </footer>
     <script>
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))

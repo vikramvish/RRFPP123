@@ -8,7 +8,7 @@
     <title>Donation</title>
     <link href="{{ URL::asset('css1/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css1/bootstrap-icons.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('css1/styles.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css1/styles1.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css1/owl.carousel.min.css') }}" rel="stylesheet">
     <script type="text/javascript" src="{{ URL::asset('js1/jquery-3.6.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js1/popper.min.js') }}"></script>
@@ -90,26 +90,7 @@
 <body class="blog_single">
     <header>
         <div class="container">
-            <div class="custom_row">
-                <div class="logo"><img src="{{ URL::asset('/images/rajgov_logo.png') }}" alt="profile Pic"></div>
-                <div class="menu">
-                    <ul>
-                        <li><a href="{{ url('/website') }}" class="home"><span class="menu_icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
-                                    data-bs-original-title="Home" aria-label="Home"><i
-                                        class="bi bi-house-heart"></i></span>Home</a></li>
-                        <li><a href="#" class="email"><span class="menu_icon" data-bs-toggle="tooltip"
-                                    data-bs-placement="bottom" title="rajGov@gmail.com"><i
-                                        class="bi bi-envelope"></i></span>rajGov@gmail.com</a></li>
-                        <li><a href="{{ url('contactus') }}" class="mobile"><span class="menu_icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Contact-Us"><i
-                                        class="bi bi-phone"></i></span>Contact-Us</a></li>
-                        <li><a href="{{ url('/Receiptt') }}" class="download"><span class="menu_icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Download Receipt"><i
-                                        class="bi bi-download"></i></span>Download Receipt</a></li>
-                    </ul>
-                </div>
-            </div>
+            @include('website.header')
         </div>
     </header>
     <div id="preloader">
@@ -131,7 +112,7 @@
                         <div class="breadcrum">
                             <ul>
                                 <li><a href="{{ url('/website') }}">Home</a></li>
-                                <li><a href="#">Payment Page</a></li>
+                                <li>{{ $collections->Heading }}</li>
                             </ul>
                         </div>
                     </div>
@@ -205,7 +186,7 @@
                                             </div>
                                             <div class="form-item">
                                                 <label class="form-label">Email Address</label>
-                                                <input type="email" class="form-control" required="required"
+                                                <input type="email" pattern="^\w+([\.-]?\w+)@\w+([\.-]?\w+)*(\.\w{2,3})+$" class="form-control" required="required"
                                                     id="email" placeholder="Enter Email Address"
                                                     name="RemitterEmailId">
                                                 {!! $errors->first('RemitterEmailId', '<p class="help-block">:message</p>') !!}
@@ -213,13 +194,13 @@
                                             <div class="form-item">
                                                 <label class="form-label">Mobile Number</label>
                                                 <input type="text" class="form-control" required="required"
-                                                    maxlength="10" id="Mobile_No" placeholder="Enter Mobile Number"
+                                                    maxlength="11" minlength="10" id="Mobile_No" placeholder="Enter Mobile Number"
                                                     name="RemitterMobile">
                                                 {!! $errors->first('RemitterMobile', '<p class="help-block">:message</p>') !!}
                                             </div>
                                             <div class="form-item">
                                                 <label class="form-label">Address</label>
-                                                <textarea class="form-control" id="address" required="required" placeholder="Enter Address"
+                                                <textarea class="form-control" id="address" placeholder="Enter Address"
                                                     name="RemitterAddress"></textarea>
                                                 {!! $errors->first('RemitterAddress', '<p class="help-block">:message</p>') !!}
                                             </div>
@@ -229,8 +210,8 @@
                                             <h3><span>Payment Information</span></h3>
                                             <div class="form-item">
                                                 <label class="form-label">PAN/TAN Number</label>
-                                                <input type="text" class="form-control" required="required"
-                                                    maxlength="10" id="pan_number" placeholder="Enter Pan Number"
+                                                <input type="text" class="form-control"
+                                                    maxlength="10" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" minlength="10" id="pan_number" placeholder="Enter Pan Number"
                                                     name="RemitterPAN">
                                                 {!! $errors->first('RemitterPAN', '<p class="help-block">:message</p>') !!}
                                             </div>
@@ -310,7 +291,7 @@
                 </div>
             </div>
         </section>
-        <section class="recent_causes">
+        {{-- <section class="recent_causes">
             <div class="container">
                 <div class="rc_slider">
                     <h2 class="main_title center">Recent Causes</h2>
@@ -325,7 +306,6 @@
                                     <p>Rajasthan Chief Minister's Assistance Fund is operated under Rajasthan Chief
                                         Minister's Office, Government Secretariat, Jaipur. In this, online can deposite
                                     </p>
-                                    {{-- <button id="donate">Donate Now</button> --}}
                                 </div>
                             </div>
                         </div>
@@ -339,7 +319,6 @@
                                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                         Lorem
                                         Ipsum has been the industry's standard dummy text standard dummy text</p>
-                                    {{-- <button id="donate">Donate Now</button> --}}
                                 </div>
                             </div>
                         </div>
@@ -353,7 +332,6 @@
                                     <p>To contribute to the economy of the state of Rajasthan through cow and its
                                         offspring and to provide biodiversity in relation with the gaushala.
                                     </p>
-                                    {{-- <button id="donate">Donate Now</button> --}}
                                 </div>
                             </div>
                         </div>
@@ -366,7 +344,6 @@
                                     <h3>Help For Lampi</h3>
                                     <p>The virus remains a period of cows in Rajasthan, just know about it.This disease
                                         occurs in cows and buffaloes.the virus is of Gotpox Family.</p>
-                                    {{-- <button id="donate">Donate Now</button> --}}
                                 </div>
                             </div>
                         </div>
@@ -379,33 +356,17 @@
                                     <h3>Help For Devasthan</h3>
                                     <p>The Department of Devasthan is a department of conservation and promotion of
                                         temple culture.Devasthan is a department of conservation</p>
-                                    {{-- <button id="donate">Donate Now</button> --}}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
     </div>
     </div>
     <footer>
-        <div class="footer_top">
-            <div class="container">
-                <ul class="footer_menu">
-                    <li><a href="{{ url('RefundPolicy') }}">Refund Policy</a></li>
-                    <li><a href="{{ url('TermsCondition') }}">Term & Condition</a></li>
-                    <li><a href="{{ url('PrivacyPolicy') }}">Privacy Policy</a></li>
-                    <li><a href="{{ url('CancellationPolicy') }}">Cancellation Policy</a></li>
-                    <li><a href="{{ url('ChargebackGuidelines') }}">Chargeback Guidelines</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer_bottom">
-            <div class="container">
-                <p>Copyright © 2022 - All rights reserved dept of IT&C, Govt of rajasthan </p>
-            </div>
-        </div>
+        @include('website.footer')
     </footer>
     {{-- <script src="jquery.js" type="text/javascript"></script> --}}
     <script>

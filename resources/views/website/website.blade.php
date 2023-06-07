@@ -81,27 +81,7 @@
     </div>
     <header>
         <div class="container">
-            <div class="custom_row">
-                <div class="logo"><img src="images/rajgov_logo.png"></div>
-                <div class="menu">
-                    <ul>
-                        <li><a href="#top" class="email"><span class="menu_icon" data-bs-toggle="tooltip"
-                                    data-bs-placement="bottom" title="Home"><i
-                                        class="bi bi-house-heart"></i></i></span>Home</a></li>
-                        <li><a href="{{ url('contactus') }}" class="mobile"><span class="menu_icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Contact-Us"><i
-                                        class="bi bi-phone"></i></span>Contact-Us</a></li>
-                        <li><a href="" class="email"><span class="menu_icon" data-bs-toggle="tooltip"
-                                    data-bs-placement="bottom" title="rajasthan.gov.in"><i
-                                        class="bi bi-envelope"></i></span>rajasthan.gov.in</a></li>
-                        <li><a href="{{ url('/Receiptt') }}" class="download"><span class="menu_icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Download Receipt"><i
-                                        class="bi bi-download"></i></span>Download Receipt</a></li>
-                        <li><a href="#help" class="donate"><span class="menu_icon"><i
-                                        class="bi bi-heart-fill"></i></span>Donate Now</a></li>
-                    </ul>
-                </div>
-            </div>
+            @include('website.header')
         </div>
     </header>
     <div class="main_section">
@@ -139,8 +119,9 @@
                     <div class="custom_row">
                         <div class="title_box">
                             <h3 class="sub_title">Welcome To RRFPP</h3>
-                            <h2 class="main_title">Small Actions Lead<br>
-                                To Big Changes</h2>
+                            {{-- <h2 class="main_title">Small Actions Lead<br>
+                                To Big Changes</h2> --}}
+                                <h2 class="main_title">{!! config('config.WELCOME') !!}</h2>
                         </div>
                         <div class="title_righ"><i class="charity-love_hearts"></i></div>
                     </div>
@@ -170,13 +151,7 @@
                     </div>
                     <div class="aboutus">
                         <div class="about_message">
-                            <p>RRFPP(Rajasthan Relief Fund Payment Portal) Assistance Fund is operated under Rajasthan
-                                IT Department Office, Yojana Bhawan,C-scheme, Jaipur. The amount is
-                                received by receiving the amount in the form of donation by and directly to the bank
-                                account. The amount given in the form of donations to Rajasthan Relief Fund Payment
-                                Portal is free from 100 percent income tax under Section 82 (G) of the Income
-                                Tax Act 1961. The appropriation of this deposit is appropriated as a fixed deposit in
-                                nationalized banks, post offices, government deposits scheme.</p>
+                            <p>{{ config('config.HOME_CONTENT') }}</p>
                         </div>
                         <ul>
                             <li>
@@ -248,124 +223,10 @@
                 </div>
             </div>
         </section>
-        <section class="partners_section">
-            <div class="container">
-                <h3 class="sub_title center">Partners</h3>
-                <h2 class="main_title center">Our Partners</h2>
-                <div class="partners_slider">
-                    <div class="owl-carousel owl-theme partnersSlider">
-                        <div class="item">
-                            <div class="partners_box">
-                                <div class="partners_img">
-                                    <img src="images/rcmrf_logo.png" alt="cmrf">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="partners_box">
-                                <div class="partners_img">
-                                    <img src="images/gmrf_logo.png" alt="gmrf">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="partners_box">
-                                <div class="partners_img">
-                                    <img src="images/devsthan_logo.png" alt="devsthan">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="partners_box">
-                                <div class="partners_img">
-                                    <img src="images/patner_rajgov_logo.png" alt="rajgov">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
     </div>
     <footer>
-        <div class="footer_top">
-            <div class="container">
-                <div class="footer_row">
-                    <div class="footer_left">
-                        <div class="footerLeft_inner">
-                            <ul>
-                                <li>
-                                    <div class="footer_item">
-                                        <div class="ci_header"><span class="ci_icon"><i
-                                                    class="bi bi-person-bounding-box"></i></span>
-                                            <h3>Nodal Officer</h3>
-                                        </div>
-                                        <p>Dr. Yuvraj Singh Gurjar,<br>SA ( Joint Director )<br>RISL, Jaipur, Rajasthan
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="footer_item">
-                                        <div class="ci_header"><span class="ci_icon"><i
-                                                    class="bi bi-building"></i></span>
-                                            <h3>Address</h3>
-                                        </div>
-                                        <p>RajCOMP Info Services Ltd. (RISL), 1st Floor, C-Block, Yojana Bhawan, Tilak
-                                            Marg, C-Scheme, Jaipur-302005 (Raj) INDIA.</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="footer_middle">
-                        <div class="footermiddle_inner">
-                            <div class="fml_box">
-                                <div class="ci_header"><span class="ci_icon"><i class="bi bi-globe2"></i></span>
-                                    <h3>Information</h3>
-                                </div>
-                                <ul>
-                                    <li><a href="{{ url('RefundPolicy') }}">Refund Policy</a></li>
-                                    <li><a href="{{ url('TermsCondition') }}">Term & Condition</a></li>
-                                    <li><a href="{{ url('PrivacyPolicy') }}">Privacy Policy</a></li>
-                                    <li><a href="{{ url('CancellationPolicy') }}">Cancellation Policy</a></li>
-                                    <li><a href="{{ url('ChargebackGuidelines') }}">Chargeback Guidelines</a></li>
-                                </ul>
-                            </div>
-                            <div class="fml_box">
-                                <div class="ci_header"><span class="ci_icon"><i class="bi bi-globe2"></i></span>
-                                    <h3>Useful Links</h3>
-                                </div>
-                                <ul>
-                                    <li><a href="https://rajasthan.gov.in" rel="noopener noreferrer"
-                                            target="_blank">Government of Rajasthan</a></li>
-                                    <li><a href="https://doitc.rajasthan.gov.in/" rel="noopener noreferrer"
-                                            target="_blank">Department of IT &amp; Communication</a></li>
-                                    <li><a href="https://risl.rajasthan.gov.in" rel="noopener noreferrer"
-                                            target="_blank">RajCOMP Info Services Ltd</a></li>
-                                    <li><a href="https:///emitra.rajasthan.gov.in" rel="noopener noreferrer"
-                                            target="_blank">Emitra</a></li>
-                                    <li><a href="https://sampark.rajasthan.gov.in/" rel="noopener noreferrer"
-                                            target="_blank">Rajasthan Sampark</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="footer_right">
-                        <div class="mapbox">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.010963212742!2d75.79652051501928!3d26.903147166978414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db696bfffffff%3A0xee47ad2808fd8f37!2sRajCOMP%20Info%20Services%20Ltd.!5e0!3m2!1sen!2sin!4v1657776909709!5m2!1sen!2sin"
-                                width="" height="" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade" style="border: 0;"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer_bottom">
-            <div class="container">
-                <p>Copyright © 2022 - All rights reserved dept of IT&C, Govt of rajasthan </p>
-            </div>
-        </div>
+        @include('website.footer')
     </footer>
 
     {{-- for live searching on input field --}}
@@ -431,25 +292,7 @@
             }
         })
     </script>
-    <script>
-        $('.partnersSlider').owlCarousel({
-            loop: true,
-            margin: 10,
-            nav: true,
-            autoplay: true,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 3
-                },
-                1000: {
-                    items: 4
-                }
-            }
-        })
-    </script>
+    
 </body>
 
 </html>

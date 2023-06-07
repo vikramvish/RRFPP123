@@ -6,14 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Donation</title>
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet" />
-    <script src="{{ asset('js/jquery-3.6.1.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/owl.carousel.min.js') }}" type="text/javascript"></script>
+    <link href="{{ URL::asset('css1/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css1/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css1/styles1.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css1/owl.carousel.min.css') }}" rel="stylesheet">
+
+    <script type="text/javascript" src="{{ URL::asset('js2/jquery-3.6.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js2/popper.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js2/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js2/owl.carousel.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js2/datatables.min.js') }}"></script>
 
     {{-- <script>
         window.onload = function() {
@@ -103,27 +105,7 @@
    
     <header>
         <div class="container">
-            <div class="custom_row">
-                <div class="logo"><img src="{{ asset('images/rajgov_logo.png') }}"></div>
-                <div class="menu">
-                    <ul>
-                        <li><a href="{{ '/website' }}" class="email"><span class="menu_icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Home"><i
-                                        class="bi bi-house-heart"></i></i></span>Home</a></li>
-                        <li><a href="{{ url('contactus') }}" class="mobile"><span class="menu_icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Contact-Us"><i
-                                        class="bi bi-phone"></i></span>Contact-Us</a></li>
-                        <li><a href="" class="email"><span class="menu_icon" data-bs-toggle="tooltip"
-                                    data-bs-placement="bottom" title="rajasthan.gov.in"><i
-                                        class="bi bi-envelope"></i></span>rajasthan.gov.in</a></li>
-                        <li><a href="{{ url('/Receiptt') }}" class="download"><span class="menu_icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Download Receipt"><i
-                                        class="bi bi-download"></i></span>Download Receipt</a></li>
-                        {{-- <li><a href="#help" class="donate"><span class="menu_icon"><i
-                                        class="bi bi-heart-fill"></i></span>Donate Now</a></li> --}}
-                    </ul>
-                </div>
-            </div>
+            @include('website.header')
         </div>
     </header>
     <div class="main_section">
@@ -222,22 +204,7 @@
         </section>
     </div>
     <footer>
-        <div class="footer_top">
-            <div class="container">
-                <ul class="footer_menu">
-                    <li><a href="#">Refund Policy</a></li>
-                    <li><a href="#">Term & Condition</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Cancellation Policy</a></li>
-                    <li><a href="#">Chargeback Guidelines</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer_bottom">
-            <div class="container">
-                <p>Copyright © 2022 - All rights reserved dept of IT&C, Govt of rajasthan </p>
-            </div>
-        </div>
+        @include('website.footer')
     </footer>
     <script>
         document.addEventListener("DOMContentLoaded", function() {

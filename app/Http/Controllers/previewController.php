@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use DB;
+
 use Illuminate\Support\Facades\Redirect;
 //  Redirect to a given Laravel URL
 use Illuminate\Support\str;
@@ -14,7 +14,7 @@ use Illuminate\Http\Client\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use App\Models\tbl_transactiondetail;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\tbl_schememaster;
 use App\Models\tbl_pgrequestlog;
 use APP\Models\tbl_departmentmetadata;
@@ -37,8 +37,8 @@ class previewController extends Controller {
     public function Register( Request $request ) {
         $request->validate( [
             'RemitterName' => 'required',
-            'RemitterPAN' => 'required',
-            'RemitterAddress' => 'required|max:60',
+            // 'RemitterPAN' => 'required',
+            // 'RemitterAddress' => 'required|max:60',
             'RemitterEmailId' => 'required|email',
             'RemitterMobile' => 'required|numeric|digits:10',
             'TransactionAmount' => 'required|min:2',
@@ -86,8 +86,16 @@ class previewController extends Controller {
         // $Form2->SchemeId = $request->input( 'scheme_id' );
         $schemeId = $request->input( 'scheme_id' );
         $Form2->SchemeId = $schemeId;
-        // $Form2->DepartmentId = $departmentId;
 
+
+        // Query the database to fetch the corresponding DepartmentId
+$departmentId = DB::table('tbl_schememasters')
+->where('SchemeId', $schemeId)
+->value('DepartmentId');
+
+// Assign the DepartmentId to the $Form2 variable
+$Form2->DepartmentId = $departmentId;
+       
         // checksum Calculate
         $calculatedChecksum = md5( $merchantCode . '|' . $PRN . '|' . $TransactionAmount . '|' . $key );
         // $Form2->CHECKSUM = $calculatedChecksum;
@@ -222,6 +230,14 @@ class previewController extends Controller {
 
         $schemeId = $request->input( 'scheme_id' );
         $Form2->SchemeId = $schemeId;
+
+
+        $departmentId = DB::table('tbl_schememasters')
+        ->where('SchemeId', $schemeId)
+        ->value('DepartmentId');
+
+        // Assign the DepartmentId to the $Form2 variable
+        $Form2->DepartmentId = $departmentId;
 
         // $selectedScheme = $request->input( 'scheme' );
         // $scheme = tbl_schememaster::find( $selectedScheme );

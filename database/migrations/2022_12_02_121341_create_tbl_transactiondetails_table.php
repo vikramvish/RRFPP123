@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('SchemeId'); 
             $table->unsignedBigInteger('DepartmentId');           
             $table->foreign('SchemeId')->references('SchemeId')->on('tbl_SchemeMasters')->onDelete('cascade');  
-            // $table->foreign('DepartmentId')->references('DepartmentId')->on('tbl_departmentmasters')->onDelete('cascade');             
+            $table->foreign('DepartmentId')->references('DepartmentId')->on('tbl_departmentmasters')->onDelete('cascade');             
             $table->integer('TransactionAmount')->default('0');
             // $table->integer('PRN');
             $table->bigInteger('REQTIMESTAMP');

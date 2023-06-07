@@ -441,6 +441,7 @@ body div.dataTables_wrapper {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin-top: 35px;
 }
 body .page-link {
     color: #2f2f74;

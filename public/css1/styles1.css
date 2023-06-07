@@ -1019,7 +1019,7 @@ form.receipt_form label {
     margin-bottom: 10px;
 }
 form.receipt_form input[type="text"] {
-    width: 100%;
+    width: 85%;
     margin-bottom: 15px;
     height: 35px;
     padding: 0px 10px;

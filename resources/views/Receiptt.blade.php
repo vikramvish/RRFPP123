@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Donation</title>
-    <link href="css2/bootstrap.min.css" rel="stylesheet">
-    <link href="css2/bootstrap-icons.css" rel="stylesheet">
-    <link href="css2/styles.css" rel="stylesheet" />
-    <link href="css2/owl.carousel.min.css" rel="stylesheet" />
+    <link href="{{ URL::asset('css1/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css1/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css1/styles1.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css1/owl.carousel.min.css') }}" rel="stylesheet">
 
     <script type="text/javascript" src="{{ URL::asset('js2/jquery-3.6.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js2/popper.min.js') }}"></script>
@@ -23,6 +23,27 @@
     </script>
 
     <style>
+        @media print {
+
+            header,
+            footer,
+            img,
+            a,
+            .print {
+                display: none;
+            }
+        }
+        .print {
+            background: #2f2f74;
+    border-radius: 50px;
+    color: #fff;
+    padding: 0px 15px;
+    height: 34px;
+    min-width: 20px;
+    margin: 0px auto;
+    display: block;
+    font-size: 15px;
+        }
         .causes-grid ul li:nth-child(3n+1) {
             clear: both;
         }
@@ -80,25 +101,7 @@
     </div>
     <header>
         <div class="container">
-            <div class="custom_row">
-                <div class="logo"><img src="images/rajgov_logo.png"></div>
-                <div class="menu">
-                    <ul>
-                        <li><a href="{{ url('/website') }}" class="home"><span class="menu_icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
-                                    data-bs-original-title="Home" aria-label="Home"><i
-                                        class="bi bi-house-heart"></i></span>Home</a></li>
-                        <li><a href="#" class="email"><span class="menu_icon" data-bs-toggle="tooltip"
-                                    data-bs-placement="bottom" title="rajGov@gmail.com"><i
-                                        class="bi bi-envelope"></i></span>rajGov@gmail.com</a></li>
-                        <li><a href="{{ url('contactus') }}" class="mobile"><span class="menu_icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Contact-Us"><i
-                                        class="bi bi-phone"></i></span>Contact-Us</a></li>
-                        <li><a href="{{ url('website#help') }}" class="donate"><span class="menu_icon"><i
-                                        class="bi bi-heart-fill"></i></span>Donate Now</a></li>
-                    </ul>
-                </div>
-            </div>
+            @include('website.header')
         </div>
     </header>
     <div class="main_section">
@@ -122,128 +125,94 @@
                                     <p>Get Receipt</p>
                                 </div>
                                 <div class="card-body">
-                                    <form action="/Receiptt" id="submit_form" method="GET"
-                                        class="receipt_form">
+                                    <form action="{{ url('/Receiptt') }}" id="submit_form" method="GET" class="receipt_form">
                                         <div class="form_coll">
-                                            <label>Search Based On Mobile No./ PRN</label>
-                                            <input type="text" maxlength="10" name="PRN-Number"
-                                                placeholder="Enter Mobile Number or PRN Number">
+                                            <label>Search Based On Mobile No. or PRN</label>
+                                            <input type="text" name="mobile_number" placeholder="Enter Mobile Number">
+                                            <input type="text" name="prn_number" placeholder="Enter PRN Number">
+                                           
                                         </div>
                                         <div class="receipt_btn_box">
-                                            <button type="submit" id="link" value="Search"
-                                                class="reset">Search</button>
-                                            <a href="{{ url('Receiptt') }}"
-                                                style="background: #2f2f74;
-											border-radius: 50px;
-											color: #fff;
-											padding: 0px 25px;
-											border: none;
-											height: 40px;
-											min-width: 150px;
-											display: block;
-											font-size: 18px;
-											text-align: center;
-										    text-decoration: none;">
-                                                <span style="display: block;margin-top: 8px;"> Reset </span>
+                                            <button type="submit" class="btn btn-primary" style="background: #2f2f74; border-radius: 50px; color: #fff; padding: 0px 25px; border: none; height: 40px; font-size: 18px; text-align: center; text-decoration: none;display:grid;">
+                                                <span style="display: block; margin-top: 8px;">Search</span>
+                                            </button>
+                                            <a href="{{ url('Receiptt') }}" style="background: #2f2f74; border-radius: 50px; color: #fff; padding: 0px 25px; border: none; height: 40px; display: block; font-size: 18px; text-align: center; text-decoration: none;margin-right: 15px;">
+                                                <span style="display: block; margin-top: 8px;">Reset</span>
                                             </a>
-                                            <a href="{{ url('/website') }}"
-                                                style="background: #2f2f74;
-											border-radius: 50px;
-											color: #fff;
-											padding: 0px 25px;
-											border: none;
-											height: 40px;
-											min-width: 150px;
-											display: block;
-											font-size: 18px;
-											text-align: center;
-										    text-decoration: none;">
-                                                <span style="display: block;margin-top: 8px;"> Back </span>
+                                            <a href="{{ url('/website') }}" style="background: #2f2f74; border-radius: 50px; color: #fff; padding: 0px 25px; border: none; height: 40px; display: block; font-size: 18px; text-align: center; text-decoration: none;">
+                                                <span style="display: block; margin-top: 8px;">Back</span>
                                             </a>
                                         </div>
                                     </form>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="data_section">
-                    <div class="container">
-                        @if (isset($countries))
-                            <table id="monthly_report" class="table table-striped table-bordered" cellspacing="0"
-                                width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>Prn</th>
-                                        <th>Name</th>
-                                        <th>Number</th>
-                                        <th>RPP Txn Id</th>
-                                        <th>Payment Mode</th>
-                                        <th>Payment Amount</th>
-                                        <th>Transaction Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (count($countries) > 0)
-                                        @foreach ($countries as $contry)
-                                            <tr>
-                                                <td>{{ $contry->PRN }}</td>
-                                                <td>{{ $contry->RemitterName }}</td>
-                                                <td>{{ $contry->RemitterMobile }}</td>
-                                                <td>{{ $contry->RPPTxnId }}</td>
-                                                <td>{{ $contry->PGModeBID }}</td>
-                                                <td>{{ $contry->PaidAmount }}</td>
-                                                <td>{{ $contry->RESPONSEMESSAGE }}</td>
-                                            </tr>
-                                        @endforeach
-                                    @else
-                                        <br>
-                                        <tr>
-                                            <td>No Result Found!</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    @endif
-                                </tbody>
-                                {{-- <span style="color: red"> <b>Note:- * Keep PRN For further Reference</b> </span> --}}
-                                <br>
-                                <br>
-                            </table>
-                        @endif
-                    </div>
-                </div>
+                                
+                                <div class="data_section">
+                                    <div class="container">
+                                        @if (isset($countries))
+                                        <table id="monthly_report" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>PRN</th>
+                                                    <th>Donner Name</th>
+                                                    <th>Mobile</th>
+                                                    <th>Payment Amount</th>
+                                                    <th>Transaction Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (count($countries) > 0)
+                                                @foreach ($countries as $country)
+                                                <tr>
+                                                    <td>{{ $country->created_at }}</td>
+                                                    <td>{{ $country->PRN }}</td>
+                                                    <td>{{ $country->RemitterName }}</td>
+                                                    <td>{{ $country->RemitterMobile }}</td>
+                                                    <td>{{ $country->PaidAmount }}</td>
+                                                    <td style="display:flex;justify-content: space-evenly;">
+                                                        @if ($country->STATUS == 'SUCCESS')
+                                                        <span style="font-weight:500" class="text-success">{{ $country->STATUS }}</span>
+                                                        <a href="{{ url('Pdf_Format?prn='.$country->PRN) }}" class="btn btn-primary">Print PDF</a>
+                                                        @else
+                                                        <span class="text-danger" style="font-weight:500">{{ $country->STATUS }}</span>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                                @else
+                                                <tr>
+                                                    <td colspan="6">No Result Found!</td>
+                                                    <td>   </td>
+                                                    <td>   </td>
+                                                    <td>   </td>
+                                                    <td>   </td>
+                                                    <td>   </td>
+                                                </tr>
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                        @endif
+                                    </div>
+                                </div>
+                                
             </div>
     </div>
     </section>
     </div>
 
     <footer>
-        <div class="footer_top">
-            <div class="container">
-                <ul class="footer_menu">
-                    <li><a href="#">Refund Policy</a></li>
-                    <li><a href="#">Term & Condition</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Cancellation Policy</a></li>
-                    <li><a href="#">Chargeback Guidelines</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer_bottom">
-            <div class="container">
-                <p>Copyright © 2022 - All rights reserved dept of IT&C, Govt of rajasthan </p>
-            </div>
-        </div>
+        @include('website.footer')
     </footer>
     <script>
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
+    </script>
+    <script>
+        function printTable() {
+            window.print();
+        }
     </script>
     <script>
         $('.recentcausesSlider').owlCarousel({
@@ -264,7 +233,16 @@
             }
         })
     </script>
-
+<script>
+    function printPDF(url) {
+        if (confirm('Print this PDF?')) {
+            const win = window.open(url, '_blank');
+            win.onload = function() {
+                win.print();
+            };
+        }
+    }
+</script>
     {{-- script to show all data in datatable --}}
     {{-- <script>
         $(document).ready(function() {

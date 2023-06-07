@@ -80,7 +80,15 @@ Route::get('/addSSOuser', [dashboardController::class, 'newSSO']);
 Route::post('store-sso', [dashboardController::class, 'SSOinsert']);
 Route::get('/ssoEdit/{id}', [dashboardController::class, 'userSSOEdit']);
 Route::put('/sso-Edit/{id}', [dashboardController::class, 'ssoupdate']);
+
+Route::get('/get-schemes', [dashboardController::class, 'getSchemes']);
+Route::get('/search_transaction', [dashboardController::class, 'search'])->name('search');
+
+Route::get('/download_reports', [dashboardController::class, 'downloadReports'])->name('downloadReports');
+Route::get('/get-report', [dashboardController::class, 'getReport']);
 });
+
+Route::get('/Pdf_Format', [dashboardController::class, 'pdfformat']);
 
 Route::get('/department', [DepartmentController::class, 'index'])->name('department');
 Route::get('/departmentedit/{DepartmentId}', [DepartmentController::class, 'edit']);
@@ -123,8 +131,6 @@ Route::post('/website-form2', [previewController::class, 'Annonmous']);
 
 Route::get('/preview', [previewController::class, 'index']);
 Route::get('/previewAnnonmous', [previewController::class, 'anonmus']);
-
-Route::get('/generate-pdf', [PdfController::class, 'generatePdf'])->name('generate-pdf');
 
 Route::get('/blogpage/{DepartmentId}', [blogpageController::class, 'index']);
 

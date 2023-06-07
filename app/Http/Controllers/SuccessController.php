@@ -132,62 +132,7 @@ class SuccessController extends Controller {
     ->first();
 
         return view( 'website/success', compact( 'collection' ) );
-    }
-    // {
-    //     $responselog = new responselog();
-    //     $MERCHANTCODE = 'testMerchant2';
-    //     $key = 'WFsdaY28Pf';
-    //     // $date = Carbon::now();
-    //     // $todaydate = date( 'Ymdhmss' );
-
-    //     // $Mobile_No = $request->RemitterMobile;
-    //     // $responselog->RemitterMobile = $Mobile_No;
-
-    //     // $Donnar_Name = $request->RemitterName;
-    //     // $responselog->RemitterName = $Donnar_Name;
-
-    //     $MERCHANTCODE = $request->MERCHANTCODE;
-    //     $responselog->MERCHANTCODE = $MERCHANTCODE;
-
-    //     $ENCDATA = $request->ENCDATA;
-    //     $responselog->ENCDATA = $ENCDATA;
-
-    //     $Decryption = new Aes256encryption();
-    //     $Decryption->setKey( '9759E1886FB5766DA58FF17FF8DD4' );
-    //     $DecryptedStr = $Decryption->Decrypt( $ENCDATA );
-    //     $responselog->DecryptString = $DecryptedStr;
-    //     $data = json_decode( $DecryptedStr, true );
-
-    //     // echo '<pre>';
-    //     // $data = ( array ) $data;
-
-    //     // $values = [ 'MERCHANTCODE' => $data[ 'MERCHANTCODE' ], 'REQTIMESTAMP' => $data[ 'REQTIMESTAMP' ],
-    //     // 'PRN' => $data[ 'PRN' ], 'RPPTXNID' => $data[ 'RPPTXNID' ], 'AMOUNT' => $data[ 'AMOUNT' ],
-    //     // 'RPPTIMESTAMP' => $data[ 'RPPTIMESTAMP' ], 'STATUS' => $data[ 'STATUS' ], 'RESPONSECODE' => $data[ 'RESPONSECODE' ],
-    //     // 'RESPONSEMESSAGE' => $data[ 'RESPONSEMESSAGE' ], 'PAYMENTMODE' => $data[ 'PAYMENTMODE' ],
-    //     // 'PAYMENTMODEBID' => $data[ 'PAYMENTMODEBID' ], 'PAYMENTMODETIMESTAMP' => $data[ 'PAYMENTMODETIMESTAMP' ],
-    //     // 'PAYMENTAMOUNT' => $data[ 'PAYMENTAMOUNT' ], 'CURRENCY' => $data[ 'CURRENCY' ], 'UDF1' => $data[ 'UDF1' ],
-    //     // 'UDF2' => $data[ 'UDF2' ], 'UDF3' => $data[ 'UDF3' ], 'CHECKSUM' => $data[ 'CHECKSUM' ],
-    //     // 'created_at' => now(), 'updated_at' => now() ];
-
-    //     // $order = DB::table( 'orders' )->insert( $data );
-    //     //DB::table( 'responselogs' )->Insert( $values );
-    //     // print_r( $data );
-
-    //     // $responselog->save();
-
-    //     $saveData = responselog::create( $data );
-
-    //     $collection = DB::table( 'responselogs' )
-    //         ->join( 'tbl_transactiondetails', 'tbl_transactiondetails.PRN', '=', 'responselogs.PRN' )
-    //         ->select( 'tbl_transactiondetails.RemitterName', 'tbl_transactiondetails.RemitterMobile' )
-    //         // ->orderby( 'tbl_transactiondetails.PRN', 'desc' )
-    //         //  ->orderby( 'PRN', 'desc' )
-    //         ->orderBy( 'responselogs.created_at', 'desc' )
-    //         ->first();
-    //     // dd( $collection );
-    //     return view( 'website/success', compact( 'saveData', 'collection' ) );
-    // }
+    }  
 }
 
 class Aes256Encryption {

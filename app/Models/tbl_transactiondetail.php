@@ -12,12 +12,21 @@ class tbl_transactiondetail extends Model
     // {
     //     return $this->hasOne(tbl_pgrequestlog::class);
     // }
-
+    public function department()
+    {
+        return $this->belongsTo(tbl_departmentmaster::class, 'DepartmentId', 'DepartmentId');
+    }
+    
+    public function scheme()
+    {
+        return $this->belongsTo(tbl_schememaster::class, 'SchemeId');
+    }
     protected $primarykey = 'PRN';
     protected $fillable = [
         // 'TransactionID',
         'PRN',
         'SchemeId',
+        'DepartmentId',
         'TransactionAmount',
         'TrackingID',
         'REQTIMESTAMP',
@@ -36,4 +45,16 @@ class tbl_transactiondetail extends Model
         'Currency',
         'CreatedAt',
     ];
+    // public function department()
+    // {
+    //     return $this->belongsTo(tbl_departmentmaster::class, 'DepartmentId');
+    // }
+    // public function scheme()
+    // {
+    //     return $this->belongsTo(tbl_schememaster::class, 'SchemeId');
+    // }
+    // public function tbl_schememasters()
+    // {
+    //     return $this->belongsTo('App\Models\tbl_schememaster', 'SchemeId');
+    // }   
 }

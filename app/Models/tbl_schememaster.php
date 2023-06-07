@@ -22,4 +22,8 @@ class tbl_schememaster extends Model
         'CreatedAt',             
         'UpdatedAt',  
     ];
+    public function tbl_departmentmasters()
+{
+    return $this->belongsTo('App\Models\tbl_departmentmaster', 'DepartmentId');
+}
 }

@@ -17,6 +17,9 @@ use App\Models\tbl_rightmaster;
 use App\Models\tbl_roleright;
 use App\Models\tbl_rolemaster;
 use App\Models\tbl_schemeconfigration;
+
+use App\Models\tbl_transactionpaymentdetail;
+
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 
@@ -540,4 +543,164 @@ class dashboardController extends Controller
             ->back()
             ->with('success', 'User SSO Update Successfully');
     }   
+    
+//search transaction page start
+   
+    public function search(Request $request)
+{
+    $selectedDepartmentId = $request->input('department');        
+    $data = tbl_transactiondetail::query()
+        ->join('tbl_transactionpaymentdetails', 'tbl_transactiondetails.PRN', '=', 'tbl_transactionpaymentdetails.PRN')
+        ->select('tbl_transactiondetails.*', 'tbl_transactionpaymentdetails.*');
+
+    // Filter by from date
+    if ($request->filled('from_date')) {
+        $data->whereDate('tbl_transactionpaymentdetails.created_at', '>=', $request->input('from_date'));
+    }
+
+    // Filter by to date
+    if ($request->filled('to_date')) {
+        $data->whereDate('tbl_transactionpaymentdetails.created_at', '<=', $request->input('to_date'));
+    }
+
+    // Filter by department
+    if ($request->filled('department') && $request->input('department') !== 'all') {
+        $data->where('DepartmentId', $request->input('department'));
+    }
+     
+    // Filter by STATUS
+    if ($request->filled('STATUS') && $request->input('STATUS') !== 'all') {
+        $data->where('tbl_transactionpaymentdetails.STATUS', $request->input('STATUS'));
+    }
+
+    if ($request->filled('scheme') && $request->input('scheme') !== 'all') {
+        $data->where('SchemeId', $request->input('scheme'));
+    }
+
+    // Filter by RPPTxnId
+    if ($request->filled('RPPTxnId')) {
+        $data->whereDate('RPPTxnId', '<=', $request->input('RPPTxnId'));
+    }
+
+    // Filter by PGModeBID
+    if ($request->filled('PGModeBID')) {
+        $data->where('PGModeBID', $request->input('PGModeBID'));
+    }
+
+    // Filter by PayModeBankBID
+    if ($request->filled('PayModeBankBID')) {
+        $data->where('PayModeBankBID', $request->input('PayModeBankBID'));
+    }
+
+    // Filter by PRN number
+    if ($request->filled('prn_number')) {
+        $data->where('tbl_transactionpaymentdetails.PRN', $request->input('prn_number'));
+    }
+    $results = $data->get();   
+    $departments = tbl_departmentmaster::all();   
+
+    $schemes = tbl_schememaster::where('DepartmentId', $selectedDepartmentId)->get();
+    // $searched = ($request->filled('from_date') || $request->filled('to_date') || $request->filled('department') || $request->filled('STATUS') || $request->filled('scheme') || $request->filled('RPPTxnId') || $request->filled('PGModeBID') || $request->filled('PayModeBankBID') || $request->filled('prn_number'));
+    $count = $request->filled('from_date') || $request->filled('to_date') || $request->filled('department') || $request->filled('STATUS') || $request->filled('scheme') || $request->filled('RPPTxnId') || $request->filled('PGModeBID') || $request->filled('PayModeBankBID') || $request->filled('prn_number') ? $results->count() : 0;
+   
+    return view('nice-html/searchTransaction', [
+        'results' => $results,
+        'departments' => $departments,
+        'schemes' => $schemes,
+        'count' => $count,
+        'searched' => $count > 0,
+        'selectedDepartmentId' => $selectedDepartmentId
+    ]);
+}
+    public function getSchemes(Request $request)
+    {
+        $departmentId = $request->input('departmentId');
+        $schemes = tbl_schememaster::where('DepartmentId', $departmentId)->get();
+    
+        $options = '<option value="">All Scheme</option>';
+        foreach ($schemes as $scheme) {
+            $options .= '<option value="' . $scheme->SchemeId . '">' . $scheme->SchemeName . '</option>';
+        }
+    
+        return $options;
+    }
+//search transaction page end
+
+
+//download report page start
+public function downloadReports(Request $request)
+{
+    $count = 0;
+    $selectedDepartmentId = $request->input('department');        
+    $data = tbl_transactiondetail::query()
+        ->join('tbl_transactionpaymentdetails', 'tbl_transactiondetails.PRN', '=', 'tbl_transactionpaymentdetails.PRN')
+        ->select('tbl_transactiondetails.*', 'tbl_transactionpaymentdetails.*');
+
+    // Filter by from date
+    if ($request->filled('from_date')) {
+        $data->whereDate('tbl_transactionpaymentdetails.created_at', '>=', $request->input('from_date'));
+    }
+
+    // Filter by to date
+    if ($request->filled('to_date')) {
+        $data->whereDate('tbl_transactionpaymentdetails.created_at', '<=', $request->input('to_date'));
+    }
+
+    // Filter by department
+    if ($request->filled('department')) {
+        $data->where('DepartmentId', $request->input('department'));
+    }
+     // Filter by department
+     if ($request->filled('STATUS')) {
+        $data->where('STATUS', $request->input('STATUS'));
+    }
+
+    // Filter by scheme
+    if ($request->filled('scheme')) {
+        $data->where('SchemeId', $request->input('scheme'));
+    }
+    $results = $data->get();   
+    $departments = tbl_departmentmaster::all();  
+
+    $schemes = tbl_schememaster::where('DepartmentId', $selectedDepartmentId)->get();
+    // $searched = ($request->filled('from_date') || $request->filled('to_date') || $request->filled('department') || $request->filled('STATUS') || $request->filled('scheme') || $request->filled('RPPTxnId') || $request->filled('PGModeBID') || $request->filled('PayModeBankBID') || $request->filled('prn_number'));
+    if ($request->filled('from_date') || $request->filled('to_date') || $request->filled('department') || $request->filled('STATUS') || $request->filled('scheme')) {
+        $count = $results->count();
+    }       
+
+        return view('nice-html/downloadReports', [ 'results' => $results,
+        'departments' => $departments,
+        'schemes' => $schemes,   
+        'count' => $count,   
+        'searched' => $count > 0,
+        'selectedDepartmentId' => $selectedDepartmentId,
+        'request' => $request]);    
+}
+
+public function getReport(Request $request)
+{
+    $departmentId = $request->input('departmentId');
+    $schemes = tbl_schememaster::where('DepartmentId', $departmentId)->get();
+
+    $options = '<option value="">All Scheme</option>';
+    foreach ($schemes as $scheme) {
+        $options .= '<option value="' . $scheme->SchemeId . '">' . $scheme->SchemeName . '</option>';
+    }
+    return $options;
+}
+//download report page end
+
+    public function pdfformat(Request $request)
+    {
+        $prn = $request->query('prn');
+
+        $data = tbl_transactiondetail::join('tbl_transactionpaymentdetails', 'tbl_transactiondetails.PRN', '=', 'tbl_transactionpaymentdetails.PRN')
+        ->where('tbl_transactiondetails.PRN', $prn)
+        ->select('tbl_transactiondetails.*', 'tbl_transactionpaymentdetails.*')
+        ->first();
+        // $data1 = tbl_transactiondetail::where('PRN', $prn)->first();
+        // $data2 = tbl_transactionpaymentdetail::where('PRN', $prn)->first();
+        return view('nice-html/PdfFormat', compact('prn','data'));
+    }
+    
 }

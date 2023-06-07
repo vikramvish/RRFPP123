@@ -25,7 +25,7 @@ class paymentpageController extends Controller
         // $scheme = DB::table('tbl_schememasters')->get();
         $scheme = DB::table('tbl_schememasters')->where('DepartmentId', $department_id)->get();
         // $dept = DB::table('tbl_departmentmasters')->get();
-        return view('website/paymentpage', compact('collections', 'scheme'));
+        return view('website/paymentpage', compact('collections', 'scheme','slug'));
     }
     public function Register(Request $request)
     {        

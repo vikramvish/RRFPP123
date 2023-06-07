@@ -10,6 +10,6 @@ class blogpageController extends Controller
     public function index($slug)
     {
         $users = tbl_departmentmetadata::where('slug', $slug)->first();         
-        return view('website/blogpage', compact('users'));
+        return view('website/blogpage', compact('users','slug'));
     }
 }

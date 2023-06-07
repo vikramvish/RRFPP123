@@ -6,14 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Donation</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ URL::asset('css1/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css1/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css/styles.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css1/styles1.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css1/owl.carousel.min.css') }}" rel="stylesheet">
+    {{-- <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-icons.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet" />
-    <link href="css/owl.carousel.min.css" rel="stylesheet" />
-    <script src="js/jquery-3.6.1.min.js" type="text/javascript"></script>
-    <script src="js/popper.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="js/owl.carousel.min.js" type="text/javascript"></script>
+    <link href="css/owl.carousel.min.css" rel="stylesheet" /> --}}
+    <script type="text/javascript" src="{{ URL::asset('js1/jquery-3.6.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js1/popper.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js1/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js1/owl.carousel.min.js') }}"></script>
     <script>
         window.onload = function() {
             document.getElementById("preloader").style.display = "none";
@@ -27,25 +32,7 @@
     </div>
     <header>
         <div class="container">
-            <div class="custom_row">
-                <div class="logo"><img src="images/rajgov_logo.png"></div>
-                <div class="menu">
-                    <ul>
-                        <li><a href="{{ url('/website') }}" class="home"><span class="menu_icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
-                                    data-bs-original-title="Home" aria-label="Home"><i
-                                        class="bi bi-house-heart"></i></span>Home</a></li>
-                        <li><a href="{{ url('contactus') }}" class="mobile"><span class="menu_icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Contact-Us"><i
-                                        class="bi bi-phone"></i></span>Contact-Us</a></li>
-                        <li><a href="#" class="download"><span class="menu_icon" data-bs-toggle="tooltip"
-                                    data-bs-placement="bottom" title="Download Receipt"><i
-                                        class="bi bi-download"></i></span>Download Receipt</a></li>
-                        <li><a href="http://127.0.0.1:8000/website#help" class="donate"><span class="menu_icon"><i
-                                        class="bi bi-heart-fill"></i></span>Donate Now</a></li>
-                    </ul>
-                </div>
-            </div>
+            @include('website.header')
         </div>
     </header>
     <div class="main_section">
@@ -67,15 +54,12 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="preview_section">
-                            <h4 style="color: red;margin-left: 11rem;font-size: 1.1rem;"><b>This is a Review of your
-                                    submission. It has not been submitted
-                                    yet !<br>
+                            <h4 style="color: red;margin-left: 11rem;font-size: 1.1rem;"><b><span style="color: #4d6fe6;font-size: 22px;">Donate :</span> Confirm before you proceed<br>
                             </h4>
                             <form action="{{ url('/website-form2') }}" method="post">
                                 @csrf
                                 <div class="form_box">
                                     <h3><span>Personal Information</span></h3>
-
                                     <div class="form-item">
                                         <label class="form-label">Scheme</label>
                                         <input type="text" class="form-control"
@@ -116,22 +100,7 @@
     </div>
 
     <footer>
-        <div class="footer_top">
-            <div class="container">
-                <ul class="footer_menu">
-                    <li><a href="{{ url('RefundPolicy') }}">Refund Policy</a></li>
-                    <li><a href="{{ url('TermsCondition') }}">Term & Condition</a></li>
-                    <li><a href="{{ url('PrivacyPolicy') }}">Privacy Policy</a></li>
-                    <li><a href="{{ url('CancellationPolicy') }}">Cancellation Policy</a></li>
-                    <li><a href="{{ url('ChargebackGuidelines') }}">Chargeback Guidelines</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer_bottom">
-            <div class="container">
-                <p>Copyright © 2022 - All rights reserved dept of IT&C, Govt of rajasthan </p>
-            </div>
-        </div>
+        @include('website.footer')
     </footer>
     <script>
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))

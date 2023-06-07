@@ -29,4 +29,8 @@ class tbl_transactionpaymentdetail extends Model
         'RESPONSEMESSAGE',        
         'CreatedAt',         
     ];
+    public function scheme()
+{
+    return $this->belongsTo(tbl_schememaster::class, 'SchemeId', 'SchemeId');
+}
 }
