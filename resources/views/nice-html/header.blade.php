@@ -1,6 +1,6 @@
 <div class="container">
     <div class="custom_row">
-        <div class="logo"><img src="images/rajgov_logo.png"></div>
+        <div class="logo"><img src="{{ asset('images/rajgov_logo.png') }}"></div>
         <div class="menu">
             <ul>
                 <li><a href="#" class="user"><span class="menu_icon avtar"><i

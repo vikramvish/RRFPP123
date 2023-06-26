@@ -11,7 +11,7 @@
     <meta name="description"
         content="Nice Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-    <title>Admin Dashboard</title>
+    <title>{{ config('config.title') }}</title>
     
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
     <link href="css/chartist.min.css" rel="stylesheet">

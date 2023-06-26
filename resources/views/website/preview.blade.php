@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Donation</title>
+    <title>{{ config('config.title') }}</title>
     <link href="{{ URL::asset('css1/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css1/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/styles.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css1/styles1.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css1/owl.carousel.min.css') }}" rel="stylesheet">
-  
+
     <script type="text/javascript" src="{{ URL::asset('js1/jquery-3.6.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js1/popper.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js1/bootstrap.min.js') }}"></script>
@@ -51,8 +51,14 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="preview_section">
-                            <h4 style="color: red;margin-left: 11rem;font-size: 1.1rem;"><b>Donate : Confirm before you proceed<br>
+                            <h4 style="color: red;margin-left: 11rem;font-size: 1.1rem;"><b>Donate : Confirm before you
+                                    proceed<br>
                             </h4>
+                            @if(session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                             <form action="{{ url('/website-dept') }}" method="post">
                                 @csrf
                                 <div class="form_box">
@@ -61,16 +67,15 @@
                                     <div class="form-item">
                                         <label class="form-label">Scheme</label>
                                         <input type="text" class="form-control"
-                                            value="{{ $selectedScheme->SchemeName }}" id="PRN" name="scheme"
-                                            readonly>
+                                            value="{{ $selectedScheme->SchemeName }}" id="PRN" name="scheme" readonly>
                                         <input type="hidden" name="scheme_id" value="{{ $selectedScheme->SchemeId }}">
                                     </div>
                                     <div class="form-item">
                                         <label class="form-label">PRN<b style="color: red;font-weight: 700;"> * Keep PRN
                                                 for further
                                                 Refrence</b></label>
-                                        <input type="text" class="form-control" value="{{ $PRN }}"
-                                            id="PRN" name="PRN" readonly>
+                                        <input type="text" class="form-control" value="{{ $PRN }}" id="PRN" name="PRN"
+                                            readonly>
                                     </div>
                                     <div class="form-item">
                                         <label class="form-label">Full Name</label>
@@ -80,29 +85,26 @@
                                     <div class="form-item">
                                         <label class="form-label">Email Address</label>
                                         <input type="email" class="form-control"
-                                            value="{{ request()->RemitterEmailId }}" id="email"
-                                            name="RemitterEmailId" readonly>
+                                            value="{{ request()->RemitterEmailId }}" id="email" name="RemitterEmailId"
+                                            readonly>
                                     </div>
                                     <div class="form-item">
                                         <label class="form-label">Phone Number</label>
-                                        <input type="text" class="form-control"
-                                            value="{{ request()->RemitterMobile }}" id="phone_number"
-                                            name="RemitterMobile" readonly>
+                                        <input type="text" class="form-control" value="{{ request()->RemitterMobile }}"
+                                            id="phone_number" name="RemitterMobile" readonly>
                                     </div>
                                     <div class="form-item">
                                         <label class="form-label">Address</label>
-                                        <input type="text" class="form-control"
-                                            value="{{ request()->RemitterAddress }}" id="RemitterAddress"
-                                            name="RemitterAddress" readonly>
+                                        <input type="text" class="form-control" value="{{ request()->RemitterAddress }}"
+                                            id="RemitterAddress" name="RemitterAddress" readonly>
                                     </div>
                                 </div>
                                 <div class="form_box">
                                     <h3><span>Payment Information</span></h3>
                                     <div class="form-item">
                                         <label class="form-label">Pan Number</label>
-                                        <input type="text" class="form-control"
-                                            value="{{ request()->RemitterPAN }}" id="pan_number" name="RemitterPAN"
-                                            readonly>
+                                        <input type="text" class="form-control" value="{{ request()->RemitterPAN }}"
+                                            id="pan_number" name="RemitterPAN" readonly>
                                     </div>
                                     <div class="form-item">
                                         <label class="form-label">Amount</label>
@@ -112,9 +114,8 @@
                                     </div>
                                 </div>
                                 <div class="btn">
-                                    <button type="submit" class="donate_btn">Procced to payment</button>
+                                    <button type="submit" class="donate_btn" onclick="return handleFormSubmission(event)">Proceed to payment</button>
                                     <a href="{{ url()->previous() }}" class="donate_btn">Reject</a>
-
                                 </div>
                             </form>
                         </div>
@@ -122,9 +123,7 @@
                 </div>
             </div>
         </section>
-
     </div>
-
     <footer>
         @include('website.footer')
     </footer>
@@ -134,6 +133,33 @@
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
     </script>
+   <script>
+    <script>
+    function handleFormSubmission(event) {
+        event.preventDefault(); // Prevent the form from submitting normally
+
+        // Submit the form via AJAX request
+        fetch('{{ url('/website-dept') }}', {
+            method: 'POST',
+            body: new FormData(event.target)
+        })
+        .then(response => {
+            if (response.ok) {
+                // Form submission was successful, proceed to payment
+                window.location.href = 'https://uat.rpp.rajasthan.gov.in/payments/v1/init';
+            } else {
+                // Form submission encountered an error, display custom 404 error
+                window.location.href = 'https://uat.rpp.rajasthan.gov.in/website.invalid_request';
+            }
+        })
+        .catch(error => {
+            // Handle any other errors that may occur during form submission
+            console.error(error);
+        });
+    }
+</script>
+</script>
+  
     <script>
         $('.recentcausesSlider').owlCarousel({
             loop: true,

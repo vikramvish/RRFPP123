@@ -9,28 +9,32 @@ class tbl_transactionpaymentdetail extends Model
 {
     use HasFactory;
     protected $primaryKey = 'PRN';
-    protected $fillable = [  
+    protected $fillable = [
         'PRN',
-        'PaidAmount',         
+        'PaidAmount',
         'PGID',
         'RPPTxnId',
-        'PGModeBID',         
+        'PGModeBID',
         'REQTIMESTAMP',
         'AMOUNT',
         'RPPTIMESTAMP',
         'STATUS',
         'PAYMENTAMOUNT',
         'CHECKSUM',
-        'PayModeBankName',             
-        'PayModeBankBID',         
-        'PayModeCardCode', 
-        'PayModeCardType',             
-        'PaymentTimeStamp', 
-        'RESPONSEMESSAGE',        
-        'CreatedAt',         
+        'PayModeBankName',
+        'PayModeBankBID',
+        'PayModeCardCode',
+        'PayModeCardType',
+        'PaymentTimeStamp',
+        'RESPONSEMESSAGE',
+        'CreatedAt',
     ];
     public function scheme()
+    {
+        return $this->belongsTo(tbl_schememaster::class, 'SchemeId', 'SchemeId');
+    }
+    public function pgMaster()
 {
-    return $this->belongsTo(tbl_schememaster::class, 'SchemeId', 'SchemeId');
+    return $this->belongsTo('App\Models\tbl_pgmaster', 'PGID', 'PGId');
 }
 }

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Donation</title>
+    <title>{{ config('config.title') }}</title>
     <link href="{{ URL::asset('css1/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css1/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css1/styles1.css') }}" rel="stylesheet">
@@ -169,12 +169,33 @@
                                                     <td>{{ $country->RemitterName }}</td>
                                                     <td>{{ $country->RemitterMobile }}</td>
                                                     <td>{{ $country->PaidAmount }}</td>
-                                                    <td style="display:flex;justify-content: space-evenly;">
+                                                    {{-- <td style="display:flex;justify-content: space-evenly;">
                                                         @if ($country->STATUS == 'SUCCESS')
                                                         <span style="font-weight:500" class="text-success">{{ $country->STATUS }}</span>
                                                         <a href="{{ url('Pdf_Format?prn='.$country->PRN) }}" class="btn btn-primary">Print PDF</a>
                                                         @else
                                                         <span class="text-danger" style="font-weight:500">{{ $country->STATUS }}</span>
+                                                        @endif
+                                                    </td> --}}
+                                                    <td style="display:flex;justify-content: space-evenly;">
+                                                        @if ($country->STATUS == 'SUCCESS')
+                                                            <span style="font-weight:700" class="text-success">{{ $country->STATUS }}</span>
+                                                            <a href="{{ url('Pdf_Format?prn='.$country->PRN) }}" target="_blank"> <i class="bi bi-file-earmark-pdf-fill"
+                                                                aria-hidden="true"
+                                                                style="color: #2f2f74; font-size: larger;"
+                                                                data-bs-toggle="tooltip"
+                                                                data-bs-placement="bottom"
+                                                                title="Download PDF"></i>
+                                                        </a>
+                                                        @else
+                                                            <span class="text-danger" style="font-weight:700">{{ $country->STATUS }}</span>
+                                                            <a href="" target="_blank"><i class="bi bi-hourglass-top"
+                                                                aria-hidden="true"
+                                                                style="color: #2f2f74; font-size: larger;"
+                                                                data-bs-toggle="tooltip"
+                                                                data-bs-placement="bottom"
+                                                                title="Verify"></i>
+                                                        </a>
                                                         @endif
                                                     </td>
                                                 </tr>
@@ -182,11 +203,11 @@
                                                 @else
                                                 <tr>
                                                     <td colspan="6">No Result Found!</td>
-                                                    <td>   </td>
-                                                    <td>   </td>
-                                                    <td>   </td>
-                                                    <td>   </td>
-                                                    <td>   </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
                                                 @endif
                                             </tbody>

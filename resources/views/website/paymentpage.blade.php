@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Donation</title>
+    <title>{{ config('config.title') }}</title>
     <link href="{{ URL::asset('css1/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css1/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css1/styles1.css') }}" rel="stylesheet">
@@ -130,8 +130,7 @@
                                 {{-- @endforeach --}}
                             </div>
                             <div class="payment_content">
-                                <p>{{ $collections->LongDescription }}</p>
-
+                                <p>{!! $collections->LongDescription !!}</p>
                             </div>
                         </div>
                     </div>
@@ -156,7 +155,7 @@
                                         <div class="form_box">
                                             <h3><span>Personal Information</span></h3>
                                             <div class="md-3">
-                                                <label class="form-lebel">Select Department</label>
+                                                {{-- <label class="form-lebel">Select Department</label> --}}
                                                 {{-- <div class="col-auto">
                                                     <select class="form-control" id="departmentDropdown" name="department"
                                                         placeholder="Select Scheme">
@@ -181,7 +180,7 @@
                                             <div class="form-item">
                                                 <label class="form-label">Full Name</label>
                                                 <input type="text" class="form-control" required="required"
-                                                    id="full_name" placeholder="Enter Full Name" name="RemitterName">
+                                                    id="full_name" placeholder="Enter Full Name" name="RemitterName" oninput="capitalizeFirstLetter(this)">
                                                 {!! $errors->first('RemitterName', '<p class="help-block">:message</p>') !!}
                                             </div>
                                             <div class="form-item">
@@ -374,6 +373,15 @@
         var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
+    </script>
+    <script>
+        function capitalizeFirstLetter(input) {
+            const words = input.value.split(' ');
+            for (let i = 0; i < words.length; i++) {
+                words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+            }
+            input.value = words.join(' ');
+        }
     </script>
     {{-- <script>
        $(document).ready(function() {

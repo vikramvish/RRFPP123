@@ -12,7 +12,7 @@
                 <meta charset="utf-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <title>Donation</title>
+                <title>{{ config('config.title') }}</title>
                 <link href="css3/bootstrap.min.css" rel="stylesheet">
                 <link href="css3/bootstrap-icons.css" rel="stylesheet">
                 <link href="css3/styles.css" rel="stylesheet" />

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Donation</title>
+    <title>{{ config('config.title') }}</title>
     <link href="css1/bootstrap.min.css" rel="stylesheet">
     <link href="css1/bootstrap-icons.css" rel="stylesheet">
     <link href="css1/styles1.css" rel="stylesheet" />
@@ -72,6 +72,31 @@
                 transform: rotate(360deg);
             }
         }
+
+        .ul-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: stretch;
+            /* Ensure equal height */
+        }
+
+        .ul-container .causes-item {
+            flex: 1;
+        }
+
+        .blog_slider {
+            display: flex;
+        }
+
+        .blog_slider .item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog_slider .item .blog_box {
+            flex-grow: 1;
+        }
     </style>
 </head>
 
@@ -121,7 +146,7 @@
                             <h3 class="sub_title">Welcome To RRFPP</h3>
                             {{-- <h2 class="main_title">Small Actions Lead<br>
                                 To Big Changes</h2> --}}
-                                <h2 class="main_title">{!! config('config.WELCOME') !!}</h2>
+                            <h2 class="main_title">{!! config('config.WELCOME') !!}</h2>
                         </div>
                         <div class="title_righ"><i class="charity-love_hearts"></i></div>
                     </div>
@@ -132,20 +157,20 @@
                     <div class="blog_slider">
                         <div class="owl-carousel owl-theme aboutSlider">
                             @foreach ($users as $user)
-                                <div class="item">
-                                    <div class="blog_box">
-                                        <div class="blog_img">
-                                            <img src=uploads/department/{{ $user->Images }} alt="education">
-                                        </div>
-                                        <div class="blog_discription">
-                                            <h2>{{ $user->Heading }}</h2>
-                                            <p>{{ $user->ShortDescription }}
-                                            </p>
-                                            <a onclick="location.href='{{ url('blogpage/' . $user->Slug) }}'"
-                                                class="read_more">Read more</a>
-                                        </div>
+                            <div class="item">
+                                <div class="blog_box">
+                                    <div class="blog_img">
+                                        <img src="uploads/department/{!! $user->Images !!}" alt="education" />
+                                    </div>
+                                    <div class="blog_discription">
+                                        <h2>{!! $user->Heading !!}</h2>
+                                        <p>{!! $user->ShortDescription !!}
+                                        </p>
+                                        <a onclick="location.href='{{ url('blogpage/' . $user->Slug) }}'"
+                                            class="read_more">Read more</a>
                                     </div>
                                 </div>
+                            </div>
                             @endforeach
                         </div>
                     </div>
@@ -201,29 +226,27 @@
                     </form>
                     @csrf
                     <div class="causes-grid" id="search-results">
-                        <ul id="show">
+                        <ul id="show" class="ul-container">
                             @foreach ($users as $user)
-                                <li class="searchable">
-                                    <div class="causes-item">
-                                        <div class="causes-img"><img src=uploads/department/{{ $user->Images }}>
-                                        </div>
-                                        <div class="causes-content">
-                                            <h3>{{ $user->Heading }}</h3>
-                                            <p>{{ $user->ShortDescription }}</p>
-                                            <button
-                                                onclick="location.href='{{ url('paymentpage', Str::slug($user->Slug)) }}'"
-                                                id="donate">Donate Now</button>
-                                        </div>
+                            <li class="searchable">
+                                <div class="causes-item">
+                                    <div class="causes-img"><img src="uploads/department/{!! $user->Images !!}"></div>
+                                    <div class="causes-content">
+                                        <h3>{!! $user->Heading !!}</h3>
+                                        <p>{!! strip_tags($user->ShortDescription) !!}</p>
+                                        <button
+                                            onclick="location.href='{{ url('paymentpage', Str::slug($user->Slug)) }}'"
+                                            id="donate">Donate Now</button>
                                     </div>
-                                </li>
+                                </div>
+                            </li>
                             @endforeach
                         </ul>
                     </div>
-
                 </div>
             </div>
         </section>
-        
+
     </div>
     <footer>
         @include('website.footer')
@@ -287,12 +310,12 @@
                     items: 3
                 },
                 1000: {
-                    items: 4
+                    items: 3
                 }
             }
         })
     </script>
-    
+
 </body>
 
 </html>

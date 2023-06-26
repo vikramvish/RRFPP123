@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Donation</title>
+    <title>{{ config('config.title') }}</title>
     <link href="{{ URL::asset('css1/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css1/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css1/styles1.css') }}" rel="stylesheet">
@@ -17,6 +17,10 @@
     <style>
         img {
             width: -webkit-fill-available;
+        }
+
+        .causes-content {
+            height: 5px;
         }
     </style>
 </head>
@@ -38,8 +42,8 @@
                         </h2>
                         <div class="breadcrum">
                             <ul>
-                                <li><a
-                                        href="{{ url('/website') }}"style="color: #312f72;text-decoration: none;">Home</a>
+                                <li><a href="{{ url('/website') }}"
+                                        style="color: #312f72;text-decoration: none;">Home</a>
                                 </li>
                                 <li> {{ $users->Heading }}</li>
                             </ul>
@@ -54,12 +58,13 @@
                     <div class="col-sm-8">
                         <div class="blogSingle_box">
                             <div class="blog_img">
-                                <img src="{{ asset('uploads/department/' . $users->Images) }}"alt="BlogImages">
+                                <img src="{{ asset('uploads/department/' . $users->Images) }}" alt="BlogImages">
                             </div>
                             <div class="blog_content">
-                                <p>{{ $users->LongDescription }}</p>
-                                <a href="{{ url('paymentpage/' . $slug) }}" class="donate_btn"><span class="donate_icon"><i
-                                            class="bi bi-heart-fill"></i></span> Donate Now</a>
+                                {!! $users->LongDescription !!}
+                                <a href="{{ url('paymentpage/' . $slug) }}" class="donate_btn">
+                                    <span class="donate_icon"><i class="bi bi-heart-fill"></i></span> Donate Now
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -80,7 +85,8 @@
                                                         Jaipur. In this, cash, check,dd and also online payment to help
                                                         chief minister refief
                                                         fund. </p>
-                                                    <a href="http://172.22.36.133:8000/blogpage/CMRF" class="read_more">Read
+                                                    <a href="http://172.22.36.133:8000/blogpage/CMRF"
+                                                        class="read_more">Read
                                                         more</a>
                                                 </div>
                                             </div>
@@ -108,8 +114,7 @@
                                         <div class="item">
                                             <div class="blog_box">
                                                 <div class="blog_img">
-                                                    <img src="{{ URL::asset('/images/devsthan.png') }}"
-                                                        alt="temple">
+                                                    <img src="{{ URL::asset('/images/devsthan.png') }}" alt="temple">
                                                 </div>
                                                 <div class="blog_discription">
                                                     <h2>Help For Devsthan</h2>
@@ -176,8 +181,8 @@
                                     </li>
                                     <li class="sidebar_item">
                                         <div class="causes-item">
-                                            <div class="causes-img"><img
-                                                    src="{{ URL::asset('/images/gosala.png') }}"></div>
+                                            <div class="causes-img"><img src="{{ URL::asset('/images/gosala.png') }}">
+                                            </div>
                                             <div class="causes-content">
                                                 <h3>Help For Gaushala</h3>
                                                 <p>To contribute to the economy of the state of Rajasthan through cow
@@ -204,8 +209,8 @@
                                     </li>
                                     <li class="sidebar_item">
                                         <div class="causes-item">
-                                            <div class="causes-img"><img
-                                                    src="{{ URL::asset('/images/devsthan.png') }}"></div>
+                                            <div class="causes-img"><img src="{{ URL::asset('/images/devsthan.png') }}">
+                                            </div>
                                             <div class="causes-content">
                                                 <h3>Help For Devasthan</h3>
                                                 <p>The Department of Devasthan is a department of conservation and

@@ -282,9 +282,7 @@ section.banner img {
     left: -35px;
     top: 13px;
 }
-.blog_slider .owl-nav {
-    display: none;
-}
+
 .about_section .title_section {
     padding: 80px 0px 225px;
     background: #f8f4f3;
@@ -296,6 +294,37 @@ section.banner img {
     display: inline-block;
     width: 100%;
 }
+
+.blog_slider 
+.owl-nav button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background: rgb(245 212 114) !important;
+    border-radius: 50%;
+    z-index: 999;
+    left:-17px;
+}
+.blog_slider .owl-nav button span {
+    font-size: 35px;
+    display: inline-block;
+    height: 35px;
+    line-height: 24px;
+    width: 35px;
+    color: #312f72;
+}
+.blog_slider 
+.owl-nav button.owl-next {
+    left: initial;
+    right: -17px;
+}
+.blog_slider .owl-dots{
+    display: none;
+}
+
 .about_message {
     text-align: center;
     color: #333;
@@ -426,7 +455,7 @@ section.recent_causes {
 }
 .causes-img img {
     max-width: 100%;
-    height: 250px;
+    height: 215px;
     width: 100%;
     object-fit: cover;
     border-radius: 10px 10px 0px 0px;
@@ -440,6 +469,7 @@ section.recent_causes {
     clear: both;
     display: inline-block;
     width: 100%;
+    height: 280px;
 }
 .causes-content h3 {
     font-size: 22px;

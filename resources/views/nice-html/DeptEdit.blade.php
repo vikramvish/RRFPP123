@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Donation</title>
+    <title>{{ config('config.title') }}</title>
     <link href="{{ asset('css3/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css3/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('css3/styles.css') }}" rel="stylesheet" />
@@ -72,10 +72,10 @@
                 </div>
                 <div class="card-body">
                     @if (Session::has('success'))
-                        <div class="alert alert-success">{{ Session::get('success') }}</div>
+                    <div class="alert alert-success">{{ Session::get('success') }}</div>
                     @endif
                     @if (Session::has('fail'))
-                        <div class="alert alert-danger">{{ Session::get('fail') }}</div>
+                    <div class="alert alert-danger">{{ Session::get('fail') }}</div>
                     @endif
                     <form action="{{ url('Dept-Edit/' . $user->DepartmentId) }}" method="post"
                         enctype="multipart/form-data">
@@ -101,28 +101,29 @@
                             {{-- if checkbox is checked => server get "1"
                             otherwise => server get "0" --}}
                             {{-- -- if uppr wali line ko i remove this active non ective ban jayega but isko
-                             comment out krne ke baad non active active ho jayega --}}
+                            comment out krne ke baad non active active ho jayega --}}
                             <input data-id="{{ $user->DepartmentId }}" name="IsActive" class="form-check-input"
-                                type="checkbox" value="1" id="flexCheckChecked"
-                                {{ $user->IsActive || old('IsActive', 0) === 1 ? 'checked' : '' }}>
+                                type="checkbox" value="1" id="flexCheckChecked" {{ $user->IsActive || old('IsActive', 0)
+                            === 1 ? 'checked' : '' }}>
                             <label class="form-check-label" for="flexCheckChecked">
                                 Status
                             </label>
                         </div>
                         <div class="btn_row">
 
-                            {{-- @if (session('role') == '1')                            
+                            {{-- @if (session('role') == '1')
                             <input type="submit" value="submit" class="primary_btn">
-                        @elseif (session('role') == '2')
-                            <input type="submit" value="submit" class="primary_btn" onclick="alert('This button is disabled')" disabled>
-                        @elseif (session('role') == '3')
+                            @elseif (session('role') == '2')
+                            <input type="submit" value="submit" class="primary_btn"
+                                onclick="alert('This button is disabled')" disabled>
+                            @elseif (session('role') == '3')
                             <!-- Button for condition 3 -->
                             <input type="submit" value="submit 3" class="primary_btn">
-                        @elseif (session('role') == '4')
+                            @elseif (session('role') == '4')
                             <!-- Button for condition 4 -->
                             <input type="submit" value="submit 4" class="primary_btn">
-                        @endif      --}}
-                        <input type="submit" value="Submit" class="primary_btn">
+                            @endif --}}
+                            <input type="submit" value="Submit" class="primary_btn">
                             <a class="btn btn-primary" href="{{ url('departmentshow') }}" role="button">Back</a>
                         </div>
                     </form>
@@ -157,7 +158,7 @@
     <script type="text/javascript"
         src="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js') }}"></script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script> --}}
-   
+
     <script>
         < script >
             $(document).ready(function() {

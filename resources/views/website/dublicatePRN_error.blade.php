@@ -54,6 +54,11 @@
                     font-weight: 700;
                     color: #1FA9D6;
                 }
+                .subfooter{
+                    color: white;
+                    font-size: 40px;
+                    font-weight: 700;
+                }
 
                 .isi {
                     font-size: 18px;
@@ -86,21 +91,16 @@
         </head>
 
         <body>
-            {{-- <div class="alert alert-danger">You are not authorized to access this page.</div>   --}}
             <div class="text-wrapper">
                 <div class="title" data-content="404">
-                    404 - Oops, Invalid Request
+                    Duplicate PRN !!, 
                 </div>
                 <div class="subtitle">
-                    ACCESS DENIED.
+                    The record already exists 
+                </div>   
+                <div class="subfooter">
+                    PLEASE GO BACK AND REFRESH THE PAGE.....
                 </div>
-                {{-- <div class="isi">
-                    You have To take Permission from <span style="color: #1FA9D6;font-size: 25px;"> super admin </span>
-                    to access this page.!
-                </div> --}}
-                {{-- <div class="buttons">
-                    <a class="button" href="{{ url('/website') }}">Go to Home</a>
-                </div> --}}
             </div>
         </body>
 

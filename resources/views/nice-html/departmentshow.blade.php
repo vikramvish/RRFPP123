@@ -12,7 +12,7 @@
                 <meta charset="utf-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <title>Donation</title>
+                <title>{{ config('config.title') }}</title>
                 <link href="css3/bootstrap.min.css" rel="stylesheet">
                 <link href="css3/bootstrap-icons.css" rel="stylesheet">
                 <link href="css3/styles.css" rel="stylesheet" />
@@ -161,7 +161,6 @@
                                         <a class="btn" href="{{ url('status-update',$users->DepartmentId) }}" class="btn btn-success editbtn btn-sm">
                                             InActive</a>
                                         } --}}
-
                                                 @if ($users->IsActive == 1)
                                                     <img src="" class="bi bi-patch-check-fill"
                                                         style="color: green;">
@@ -169,7 +168,6 @@
                                                     <img src="" class="bi bi-patch-check-fill"
                                                         style="color: red;">
                                                 @endif
-
                                             </td>
                                             <td style="text-align: center">
                                                 <a class="btn"

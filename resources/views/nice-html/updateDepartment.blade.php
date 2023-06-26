@@ -5,12 +5,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Donation</title>
+    <title>{{ config('config.title') }}</title>
     <link href="{{ asset('css3/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css3/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('css3/styles.css') }}" rel="stylesheet">
     <link href="{{ asset('css3/datatables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css3/owl.carousel.min.css') }}" rel="stylesheet">
+    {{-- <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.css"> --}}
+    <script src="https://cdn.ckeditor.com/4.16.2/full-all/ckeditor.js"></script>
+
+
     {{-- <link href="css3/bootstrap.min.css" rel="stylesheet">
     <link href="css3/bootstrap-icons.css" rel="stylesheet">
     <link href="css3/styles.css" rel="stylesheet" />
@@ -108,21 +113,24 @@
                             </div>
                         </div>
                         <div class="form_row">
-                            <div class="form_item">
+                            <div class="form_item" style="width: 100%;">
                                 <label>Short Description</label>
-                                <textarea class="form-control" name="ShortDescription" id="exampleFormControlTextarea1" rows="3">{{ $user->ShortDescription }}</textarea>
-                            </div>
-                            <div class="form_item">
+                                <textarea class="form-control" name="ShortDescription" id="short-description-editor">{{ $user->ShortDescription }}</textarea>
+                                <span id="description-error" style="color: red;"></span>
+                            </div>                           
+                        </div>
+                        <div class="form_row">
+                            <div class="form_item" style="width: 100%;">
                                 <label>Long Description</label>
-                                <textarea class="form-control" name="LongDescription" id="exampleFormControlTextarea1" rows="3">{{ $user->LongDescription }}</textarea>
-                            </div>
+                                <textarea name="LongDescription" id="long-description-editor" rows="3">{{ $user->LongDescription }}</textarea>
+                             </div>
                         </div>
                         <div class="form_row">
                             <div class="form_item full">
                                 <label>Image</label>
                                 <input type="file" name="Images" id="" class="form-control">
                                 <img src="{{ asset('uploads/department/' . $user->Images) }}" width="110px"
-                                    height="70px" alt="Img">
+                                    height="70px" alt="{{ $user->Heading }}">
                             </div>
                         </div>
                         <div class="btn_row">
@@ -174,7 +182,34 @@
     <script type="text/javascript"
         src="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js') }}"></script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script> --}}
-
+    <script>
+        // CKEDITOR.editorConfig = function(config) {
+        //     config.language = 'es';  // Set the language to Spanish
+        //     config.uiColor = '#F7B42C';  // Set the UI color
+        //     config.height = 300;  // Set the editor height
+        //     config.toolbarCanCollapse = true;  // Enable collapsing toolbar
+        // };
+    
+        CKEDITOR.replace('short-description-editor');
+        CKEDITOR.replace('long-description-editor');
+    </script>
+   
+    <script>
+        const descriptionInput = document.getElementById('short-description-editor');
+        const descriptionError = document.getElementById('description-error');
+    
+        descriptionInput.addEventListener('input', function() {
+            const maxLength = parseInt(descriptionInput.getAttribute('maxlength'));
+            const currentLength = descriptionInput.value.length;
+    
+            if (currentLength > maxLength) {
+                descriptionInput.value = descriptionInput.value.substring(0, maxLength);
+                descriptionError.textContent = 'Maximum character limit exceeded.';
+            } else {
+                descriptionError.textContent = '';
+            }
+        });
+    </script>
     <script>
         < script >
             $(document).ready(function() {

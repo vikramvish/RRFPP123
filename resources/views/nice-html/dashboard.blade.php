@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Donation</title>
+    <title>{{ config('config.title') }}</title>
     <link href="css3/bootstrap.min.css" rel="stylesheet">
     <link href="css3/bootstrap-icons.css" rel="stylesheet">
     <link href="css3/styles.css" rel="stylesheet" />
@@ -225,7 +225,7 @@
                 </div>
             </div>
         </div>
-        <div class="data_section">
+        {{-- <div class="data_section">
             <div class="container">
                 <h3 class="main_title">Monthly Donation Report</h3>
                 <div class="fillter">
@@ -270,7 +270,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> --}}
         <div class="chart_section">
             <div class="container">
                 <div class="custom_row">

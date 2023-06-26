@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Donation</title>
+    <title>{{ config('config.title') }}</title>
     <link href="{{ asset('css3/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css3/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('css3/styles.css') }}" rel="stylesheet" />
@@ -92,12 +92,17 @@
                                     value="{{ $user->SchemeNameHindi }}">
                             </div>
                         </div>
-                        <div class="form_row">
+                        <div class="form_row">                           
                             <div class="form_item">
                                 <label>Department</label>
-                                <input type="text" id="SchemeName_hindi" name="DepartmentName"
-                                    placeholder="Enter department" class="form-control" required
-                                    value="{{ $user->DepartmentName }}">
+                                <select id="department-select" name="DepartmentId" class="form-control" required>
+                                    <option value="">Select department</option>
+                                    @foreach($departments as $department)
+                                        <option value="{{ $department->DepartmentId }}" {{ $department->DepartmentId == $user->DepartmentId ? 'selected' : '' }}>
+                                            {{ $department->DepartmentName }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form_item" style="margin-top: 28px;">
                                 {{-- <input type="hidden" name="IsActive" value="0" />  --}}

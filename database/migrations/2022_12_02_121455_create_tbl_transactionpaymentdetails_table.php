@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('tbl_transactionpaymentdetails', function (Blueprint $table) {           
             $table->unsignedBigInteger('PRN')->primary();            
             $table->integer('PaidAmount')->default('0.00');
-            $table->integer('PGID');
+            $table->unsignedBigInteger('PGID');
+            // $table->integer('PGID');
             $table->integer('RPPTxnId');
             $table->string('PGModeBID');
 
@@ -34,7 +35,7 @@ return new class extends Migration
             $table->string('PaymentTimeStamp');
             $table->string('RESPONSEMESSAGE');
             $table->foreign('PRN')->references('PRN')->on('tbl_transactiondetails')->onDelete('cascade');               
-
+            $table->foreign('PGID')->references('PGId')->on('tbl_pgmasters');
             $table->timestamps();
         });
     }

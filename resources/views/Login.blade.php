@@ -45,14 +45,13 @@
                         <p>Rajasthan Relief Payment Fund</p>
                     </div>
                     <div class="form_body">
-                        {{-- {{ session('valid') }} --}}
                         <span style="color: darkblue;font-weight: 600;margin-right: 226px;">Login with SSO</span>
                         <div class="form_row">
                             <div class="form_coll full">
                                 <span class="input_icon"><i class="bi bi-person-fill"></i></span>
-                                <input type="text" id="login_id" class="inputbox" name="UserName"
-                                    placeholder="Enter Your UserName" required autofocus value="{{ old('UserName') }}">
-                                {!! $errors->first('UserName', '<p class="help-block">:message</p>') !!}
+                                <input type="text" id="login_id" class="inputbox" name="UserName" placeholder="Enter Your UserName" required autofocus value="{{ old('UserName') }}">
+                            {!! $errors->first('UserName', '<p class="help-block">:message</p>') !!}
+
                             </div>
                         </div>
                         <div class="form_row">
@@ -68,18 +67,12 @@
                                 <input type="checkbox" value="Remember Me" name="remember">
                                 <span>Remember Me</span>
                             </div>
-                            {{-- <div class="form_coll right">
-                            <a href="#" class="forget_pass">Forget Password?</a>
-                        </div> --}}
                         </div>
                         <div class="btn_row">
                             <button type="submit" class="primary_btn">Login</button>
                         </div>
                     </div>
                 </form>
-                {{-- <div class="other_link">
-                <p>You don't have account? click on this link <a href="{{ url('registration') }}">Register</a></p>
-            </div> --}}
             </div>
         </div>
     </div>

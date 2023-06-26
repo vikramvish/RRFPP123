@@ -56,7 +56,7 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
        if ($exception instanceof MethodNotAllowedHttpException) {
-          return response()->view('website.invalid_request', [], Response::HTTP_BAD_REQUEST);
+          return response()->view('website.invalid_request', [], 404);
         }
 
           return parent::render($request, $exception);

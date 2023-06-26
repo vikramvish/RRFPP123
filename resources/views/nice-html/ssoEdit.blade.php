@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Donation</title>
+    <title>{{ config('config.title') }}</title>
     <link href="{{ asset('css3/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css3/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('css3/styles.css') }}" rel="stylesheet" />
@@ -53,52 +53,7 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="{{ url('dashboard') }}"><span
-                                            class="nav_icon"><i class="bi bi-house-heart-fill"></i></span> Dashboard</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('addSchDept') }}"><span class="nav_icon"><i
-                                                class="bi bi-building"></i></span> CMS Management</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <span class="nav_icon"><i class="bi bi-bank"></i></span>Management
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="{{ url('departmentshow') }}"><span
-                                                    class="nav_icon"><i class="bi bi-info-circle-fill"></i></span>
-                                                Department Management</a></li>
-                                        <li><a class="dropdown-item" href="{{ url('schemeshow') }}"><span
-                                                    class="nav_icon"><i class="bi bi-info-circle-fill"></i></span>
-                                                Scheme Management</a></li>
-                                        <li><a class="dropdown-item" href="{{ url('SchConfigration') }}"><span
-                                                    class="nav_icon"><i class="bi bi-info-circle-fill"></i></span>Scheme
-                                                Configrations</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <span class="nav_icon"><i class="bi bi-command"></i></span> System
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="{{ url('SSOmaping') }}"><span
-                                                    class="nav_icon"><i class="bi bi bi-geo"></i></span>SSO User</a>
-                                        </li>
-                                        {{-- <li><a class="dropdown-item" href="#"><span class="nav_icon"><i
-                                                        class="bi bi-person-lines-fill"></i></span> Contact</a></li>
-                                        <li><a class="dropdown-item" href="#"><span class="nav_icon"><i
-                                                        class="bi bi-chat-text-fill"></i></span> Feedback</a></li> --}}
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"></a>
-                                </li>
-                            </ul>
+                            @include('nice-html.navbar')
                         </div>
                     </div>
                 </nav>

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Donation</title>
+    <title>{{ config('config.title') }}</title>
     <link href="{{ URL::asset('css1/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css1/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css1/styles1.css') }}" rel="stylesheet">
@@ -101,8 +101,9 @@
         }
     </style>
 </head>
+
 <body>
-   
+
     <header>
         <div class="container">
             @include('website.header')
@@ -150,16 +151,16 @@
                                             </tr>
                                             <tr>
                                                 <th>Name</th>
-                                                <td>{{ $collection->RemitterName ?? '' }}</td>
+                                                <td>{{ $collection->RemitterName ?? 'Not provided' }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Mobile Number</th>
-                                                <td>{{ $collection->RemitterMobile ?? '' }}</td>
+                                                <td>{{ $collection->RemitterMobile ?? 'Not provided' }}</td>
                                             </tr>
 
                                             <tr>
                                                 <th>Remitter Email</th>
-                                                <td>{{ $collection->RemitterEmailId ?? '' }}</td>
+                                                <td>{{ $collection->RemitterEmailId ?? 'Not provided' }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -193,11 +194,12 @@
                         @else
                             <div id="loader" class="loader"></div>
                             @endif
-
-                            <a href="{{ '/website' }}">
-                                <button type="button" class="back_btn">Back</button>
-                            </a>
-                            <button type="button" class="print" onclick="printTable()">Print PDF</button>
+                            <div class="btn" style="display: flex;margin-left: 200px;">
+                                <a href="{{ '/website' }}">
+                                    <button type="button" class="back_btn">Back</button>
+                                </a>
+                                <button type="button" class="print" onclick="printTable()">Print PDF</button>
+                            </div>
                         </div>
                     </div>
                 </div>

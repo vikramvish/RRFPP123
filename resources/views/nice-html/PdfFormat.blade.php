@@ -5,9 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Donation Invoice</title>
+    <title>{{ config('config.title') }}</title>
 
     <style>
+        .btn {
+            display: flex;
+            justify-content: space-between;
+            text-decoration: none;
+        }
+
         @media print {
 
             header,
@@ -80,8 +86,13 @@
 
 <body>
     <div class="invoice">
-        <button type="button" class="print" onclick="printTable()" style="color: white;
-    background-color: #111160;border-color: #111160;font-weight: 700;">Print PDF</button>
+        <div class="btn">
+            <button type="button" class="print" onclick="printTable()"
+                style="color: white;background-color: #111160;border-color: #111160;font-weight: 700;">Print
+                PDF</button>
+            {{-- <button type="button" style="color: white;font-weight: 700;">
+                <a href="/download_reports" class="btn btn-primary">Back</a></button> --}}
+        </div>
         <div class="header">
             <h2>Rajasthan Relief Fund Payment Portal</h2>
             <!-- <h2>RajCOMP Info Services Ltd. (A Govt. of Rajasthan Validated)</h2> -->
@@ -120,9 +131,9 @@
                         <td>{{ $data->AMOUNT }}</td>
                         <th>Transaction Date</th>
                         <td>{{ $data->created_at }}</td>
-                    </tr>                   
+                    </tr>
                 </table>
-            </div>           
+            </div>
             <div class="info">
                 <h2>Merchant Details</h2>
                 <p><strong>Nodal Officer Name:</strong> Yuvraj Singh</p>

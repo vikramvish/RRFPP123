@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'title' => 'Relief Fund Portal',
     'address' => 'RajCOMP Info Services Ltd. (RISL), 1st Floor, C-Block, Yojana Bhawan, Tilak Marg, C-Scheme, Jaipur-302005 (Raj) INDIA.',
     'Email' => 'support[dot]rajasthan[dot]gov[dot]in',
     'PHONE' => '0141-000000',

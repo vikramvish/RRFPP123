@@ -16,10 +16,14 @@ class tbl_transactiondetail extends Model
     {
         return $this->belongsTo(tbl_departmentmaster::class, 'DepartmentId', 'DepartmentId');
     }
-    
+
     public function scheme()
     {
         return $this->belongsTo(tbl_schememaster::class, 'SchemeId');
+    }
+    public function transactionPaymentDetails()
+    {
+        return $this->hasMany(\App\Models\tbl_transactionpaymentdetail::class, 'PRN', 'PRN');
     }
     protected $primarykey = 'PRN';
     protected $fillable = [
@@ -56,5 +60,5 @@ class tbl_transactiondetail extends Model
     // public function tbl_schememasters()
     // {
     //     return $this->belongsTo('App\Models\tbl_schememaster', 'SchemeId');
-    // }   
+    // }
 }
