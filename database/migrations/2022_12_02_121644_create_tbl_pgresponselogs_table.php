@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tbl_pgresponselogs', function (Blueprint $table) {
             $table->unsignedBigInteger('RequestId');             
-            $table->foreign('RequestId')->references('RequestId')->on('tbl_PGRequestLogs')->onDelete('cascade');   
+            $table->foreign('RequestId')->references('RequestId')->on('tbl_pgrequestlogs')->onDelete('cascade');   
             $table->string('ResponseMethod')->default('POST');
             $table->string('Referrer'); 
             $table->string('EncryptedResponse');

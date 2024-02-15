@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.css"> --}}
     <script src="https://cdn.ckeditor.com/4.16.2/full-all/ckeditor.js"></script>
 
-
-    {{-- <link href="css3/bootstrap.min.css" rel="stylesheet">
+    {{--
+    <link href="css3/bootstrap.min.css" rel="stylesheet">
     <link href="css3/bootstrap-icons.css" rel="stylesheet">
     <link href="css3/styles.css" rel="stylesheet" />
     <link href="css3/datatables.min.css" rel="stylesheet" />
@@ -84,46 +84,59 @@
                 </div>
                 <div class="card-body">
                     @if (Session::has('success'))
-                        <div class="alert alert-success">{{ Session::get('success') }}</div>
+                    <div class="alert alert-success">{{ Session::get('success') }}</div>
                     @endif
                     @if (Session::has('fail'))
-                        <div class="alert alert-danger">{{ Session::get('fail') }}</div>
+                    <div class="alert alert-danger">{{ Session::get('fail') }}</div>
                     @endif
-                    <form id="new_shema" method="post" action="{{ url('update-department/' . $user->DepartmentId) }}" enctype="multipart/form-data">
+                    <form id="new_shema" method="post" action="{{ url('update-department/' . $user->DepartmentId) }}"
+                        enctype="multipart/form-data">
                         {{-- @csrf
                         @method('PUT') --}}
                         @csrf
                         @method('POST')
                         {{-- @if ($user->DepartmentId)
                         @method('PUT')
-                    @endif --}}
+                        @endif --}}
                         <input type="hidden" name="DepartmentId" value="{{ $user->DepartmentId }}">
                         <div class="form_row">
                             <div class="form_item">
                                 <label>Heading</label>
                                 <input type="text" id="Heading" name="Heading" placeholder="Enter heading"
                                     class="form-control" required value="{{ $user->Heading }}">
-                                {{-- <textarea class="form-control" name="heading" id="exampleFormControlTextarea1" rows="3">{{ $user->Heading }}</textarea> --}}
                             </div>
                             <div class="form_item">
                                 <label>Slug</label>
-                                <input type="text" id="Slug" name="Slug" placeholder="Enter slug"
-                                    class="form-control" required value="{{ $user->Slug }}">
-                                {{-- <textarea class="form-control" name="slug" id="exampleFormControlTextarea1" rows="3">{{ $user->Slug }}</textarea> --}}
+                                <input type="text" id="Slug" name="Slug" placeholder="Enter slug" class="form-control"
+                                    required value="{{ $user->Slug }}">
                             </div>
                         </div>
                         <div class="form_row">
                             <div class="form_item" style="width: 100%;">
                                 <label>Short Description</label>
-                                <textarea class="form-control" name="ShortDescription" id="short-description-editor">{{ $user->ShortDescription }}</textarea>
-                                <span id="description-error" style="color: red;"></span>
-                            </div>                           
+                                <textarea class="form-control" name="ShortDescription" id="short-description-editor" maxlength="400" oninput="updateCounter()" required>{{ $user->ShortDescription }}</textarea>
+                                <span id="characterCount">400 characters remaining</span>
+                                <p id="error" style="color: red; display: none;">Exceeded character limit!</p>
+                                @if ($errors->has('ShortDescription'))
+                                    <span class="error" style="color: red; font-weight: 500;">{{ $errors->first('ShortDescription') }}</span>
+                                @endif
+                            </div>
+                                {{-- @if ($errors->has('ShortDescription'))
+                                <span class="error" style="color: red;font-weight:500;">{{ $errors->first('ShortDescription') }}</span>
+                            @endif --}}
+                                {{-- <span id="description-error" style="color: red;"></span> --}}
+                            {{-- </div> --}}
                         </div>
                         <div class="form_row">
                             <div class="form_item" style="width: 100%;">
                                 <label>Long Description</label>
-                                <textarea name="LongDescription" id="long-description-editor" rows="3">{{ $user->LongDescription }}</textarea>
-                             </div>
+                                <textarea name="LongDescription" id="long-description-editor"
+                                    rows="3" required>{{ $user->LongDescription }}</textarea>
+                                    <p id="error" style="color: red; display: none;">Exceeded character limit!</p>
+                                @if ($errors->has('LongDescription'))
+                                    <span class="error" style="color: red; font-weight: 500;">{{ $errors->first('LongDescription') }}</span>
+                                @endif
+                            </div>
                         </div>
                         <div class="form_row">
                             <div class="form_item full">
@@ -134,19 +147,20 @@
                             </div>
                         </div>
                         <div class="btn_row">
-                            {{-- @if (session('role') == '1')                            
+                            {{-- @if (session('role') == '1')
                             <input type="submit" value="Submit" class="primary_btn">
-                        @elseif (session('role') == '2')
-                        <input type="submit" value="Submit" class="primary_btn" onclick="alert('This button is disabled')" disabled>
+                            @elseif (session('role') == '2')
+                            <input type="submit" value="Submit" class="primary_btn"
+                                onclick="alert('This button is disabled')" disabled>
 
-                        @elseif (session('role') == '3')
+                            @elseif (session('role') == '3')
                             <!-- Button for condition 3 -->
                             <input type="submit" value="Submit" class="primary_btn">
-                                
-                        @elseif (session('role') == '4')
+
+                            @elseif (session('role') == '4')
                             <!-- Button for condition 4 -->
                             <input type="submit" value="Submit" class="primary_btn">
-                        @endif    --}}
+                            @endif --}}
                             <input type="submit" value="Submit" class="primary_btn">
                             <a class="btn btn-primary" href="javascript:history.back()" role="button">Back</a>
                         </div>
@@ -172,8 +186,51 @@
                 <p>Copyright © 2022 - All rights reserved dept of IT&C, Govt of rajasthan </p>
             </div>
         </div>
-    </footer>
+    </footer>  
+   
+    <script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    function updateCounter() {
+        var textarea = document.getElementById("short-description-editor");
+        var counter = document.getElementById("characterCount");
+        var error = document.getElementById("error");
 
+        var remainingChars = 400 - textarea.textLength;
+        counter.textContent = remainingChars + " characters remaining";
+
+        if (remainingChars < 0) {
+            counter.style.color = "red";
+            error.style.display = "block";
+            textarea.value = textarea.value.substring(0, textarea.textLength);
+        } else {
+            counter.style.color = "";
+            error.style.display = "none";
+        }
+    }
+
+    window.onload = function() {
+        updateCounter();
+    };
+</script>
+<script>
+    $(document).ready(function() {
+        // Function to count the number of words
+        function countWords(text) {
+            var words = text.trim().split(/\s+/);
+            return words.length;
+        }
+
+        // Event listener for input in the textarea
+        $('#short-description-editor').on('input', function() {
+            var text = $(this).val();
+            var wordCount = countWords(text);
+            $('#wordCount').text(wordCount + ' words');
+        });
+    });
+</script>
+        </script>
+   
     <script type="text/javascript" src="{{ URL::asset('js3/jquery-3.6.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js3/popper.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js3/bootstrap.min.js') }}"></script>
@@ -193,7 +250,7 @@
         CKEDITOR.replace('short-description-editor');
         CKEDITOR.replace('long-description-editor');
     </script>
-   
+
     <script>
         const descriptionInput = document.getElementById('short-description-editor');
         const descriptionError = document.getElementById('description-error');

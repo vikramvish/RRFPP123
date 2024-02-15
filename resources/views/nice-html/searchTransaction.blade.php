@@ -177,6 +177,8 @@ $hasPermission = false;
                 </div>
 
                 <div id="searchResults">
+                    @if(session('roleId') == 1)
+
                     <form action="{{ route('search') }}" method="GET">
                         @csrf
                         <div class="form-row">
@@ -212,31 +214,44 @@ $hasPermission = false;
                                         ? 'selected' : '' }}>
                                         All Department</option>
                                     @foreach ($departments as $department)
+                                    @if ($department->IsActive == 1)
                                     <option value="{{ $department->DepartmentId }}" {{
                                         $selectedDepartmentId==$department->DepartmentId ? 'selected'
                                         : '' }}>
                                         {{ $department->DepartmentName }}
                                     </option>
+                                    @endif
                                     @endforeach
                                 </select>
                             </div>
+
+                            {{-- <div class="form_item">
+                                <label for="scheme">Scheme:</label>
+                                <select id="scheme" class="form-select filter-select" name="scheme">
+                                    <option value="">All Scheme</option>
+                                    @forelse ($schemes ?? [] as $scheme)
+                                    <option value="{{ $scheme->SchemeId }}">{{ $scheme->SchemeName }}</option>
+                                    @empty
+                                    <option value="">No Schemes Found</option>
+                                    @endforelse
+                                </select>
+                            </div> --}}
                             <div class="form_item">
                                 <label for="scheme">Scheme:</label>
-                                <select id="scheme" class="form-select filter-select" name="scheme"
-                                    value="{{ request('scheme') }}">
-                                    <option value="" {{ isset($selectedSchemeId) && $selectedSchemeId==='' ? 'selected'
-                                        : '' }}>
-                                        All Scheme</option>
-                                    @foreach ($schemes as $scheme)
-                                    <option value="{{ $scheme->SchemeId }}" {{ isset($selectedSchemeId) &&
-                                        $selectedSchemeId==$scheme->SchemeId ? 'selected' : '' }}>
-                                        {{ $scheme->SchemeName }}
-                                    </option>
-                                    @endforeach
-                                    {{-- Show a default option if no schemes are available --}}
+                                <select id="scheme" class="form-select filter-select" name="scheme">
+                                    <option value="">All Scheme</option>
+                                    @if (!empty($schemes))
+                                    @forelse ($schemes as $scheme)
+                                    <option value="{{ $scheme->SchemeId }}">{{ $scheme->SchemeName }}</option>
+                                    @empty
                                     <option value="">No Schemes Found</option>
+                                    @endforelse
+                                    @else
+                                    <option value="">No Schemes Found</option>
+                                    @endif
                                 </select>
                             </div>
+
                         </div>
 
                         <div class="form-row">
@@ -252,15 +267,7 @@ $hasPermission = false;
                             </div>
                         </div>
                         <div class="form-row">
-                            {{-- <div class="form_item">
-                                <label for="prn">Count</label>
-                                @if ($results->isNotEmpty() && isset($searched))
-                                <input type="text" class="form-control" name="count" id="prn" value="{{ $count }}"
-                                    readonly>
-                                @else
-                                <input type="text" class="form-control" name="count" id="prn" value="" readonly>
-                                @endif
-                            </div> --}}
+
                             <div class="form_item">
                                 <label for="prn">Count</label>
                                 <select data-column="0" class="form-select filter-select" name="count" id="dropdown"
@@ -292,6 +299,149 @@ $hasPermission = false;
                                 </a></button>
                         </div>
                     </form>
+                    @elseif(session('roleId') == 2 || session('roleId') == 3 || session('roleId') == 4)
+                    <form action="{{ route('search') }}" method="GET">
+                        @csrf
+                        <form action="{{ route('search') }}" method="GET">
+                            @csrf
+                            <div class="form-row">
+                                <div class="form_item">
+                                    <label for="from_date">From Date:</label>
+                                    <input type="date" class="form-control" id="from_date" name="from_date"
+                                        value="{{ request('from_date') ? date('d/m/Y', strtotime(request('from_date'))) : '' }}">
+                                </div>
+                                <div class="form_item">
+                                    <label for="to_date">To Date:</label>
+                                    <input type="date" class="form-control" id="to_date" name="to_date"
+                                        value="{{ old('to_date', date('Y-m-d')) }}">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form_item">
+                                    <label for="prn_number">PRN:</label>
+                                    <input type="text" class="form-control" id="prn_number" name="prn_number"
+                                        value="{{ request('prn_number') }}">
+                                </div>
+                                <div class="form_item">
+                                    <label for="prn_number">RPP Transaction Id:</label>
+                                    <input type="text" class="form-control" id="txn_id" name="RPPTxnId"
+                                        value="{{ request('RPPTxnId') }}">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                {{-- <div class="form_item">
+                                    <label for="department">Department:</label>
+                                    <select id="department" class="form-select filter-select" name="department"> --}}
+                                        {{-- <option value="" {{ isset($selectedDepartmentId) &&
+                                            $selectedDepartmentId==='' ? 'selected' : '' }}>
+                                            All Department</option> --}}
+                                        {{-- @if (in_array($roleId, [2, 3, 4])) --}}
+                                        {{-- @foreach ($departments as $department) --}}
+                                        {{-- @if ($department->DepartmentId == $departmentId) --}}
+                                        {{-- <option value="{{ $department->DepartmentId }}" selected>
+                                            {{ $department->DepartmentName }}
+                                        </option> --}}
+                                        {{-- @endif --}}
+                                        {{-- @endforeach --}}
+                                        {{-- @else
+                                        @foreach ($departments as $department)
+                                        <option value="{{ $department->DepartmentId }}" {{
+                                            $selectedDepartmentId==$department->DepartmentId ? 'selected' : '' }}>
+                                            {{ $department->DepartmentName }}
+                                        </option>
+                                        @endforeach
+                                        @endif --}}
+                                        {{--
+                                    </select> --}}
+                                    {{--
+                                </div> --}}
+                                <div class="form_item">
+                                    <label for="department">Department:</label>
+                                    <select id="department" class="form-select filter-select" name="department">
+                                        {{-- <option value="all" {{ $selectedDepartmentId=='all' ? 'selected' : '' }}>
+                                            Show All</option> --}}
+                                        @foreach ($departments as $department)
+                                        @if (in_array($department->DepartmentId, $departmentIds))
+                                        <option value="{{ $department->DepartmentId }}" {{ $department->DepartmentId ==
+                                            $selectedDepartmentId ? 'selected' : '' }}>
+                                            {{ $department->DepartmentName }}
+                                        </option>
+                                        @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                                {{-- <div class="form_item">
+                                    <label for="scheme">Scheme:</label>
+                                    <select id="scheme" class="form-select filter-select" name="scheme">
+                                        <option value="" {{ isset($selectedSchemeId) && $selectedSchemeId===''
+                                            ? 'selected' : '' }}>
+                                            All Scheme</option>
+                                        @foreach ($schemes as $scheme)
+                                        <option value="{{ $scheme->SchemeId }}" {{ isset($selectedSchemeId) &&
+                                            $selectedSchemeId==$scheme->SchemeId ? 'selected' : '' }}>
+                                            {{ $scheme->SchemeName }}
+                                        </option>
+                                        @endforeach
+                                        <option value="">No Schemes Found</option>
+                                    </select>
+                                </div> --}}
+                                <div class="form_item">
+                                    <label for="scheme">Scheme:</label>
+                                    <select id="scheme" class="form-select filter-select" name="scheme">
+                                        <option value="">All Scheme</option>
+                                        @forelse ($schemes as $scheme)
+                                        <option value="{{ $scheme->SchemeId }}">{{ $scheme->SchemeName }}</option>
+                                        @empty
+                                        <option value="">No Schemes Found</option>
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form_item">
+                                    <label for="prn_number">PG Bid:</label>
+                                    <input type="text" class="form-control" id="prn_number" name="PGModeBID"
+                                        value="{{ request('PGModeBID') }}">
+                                </div>
+                                <div class="form_item">
+                                    <label for="prn_number">PG Bank bid:</label>
+                                    <input type="text" class="form-control" id="txn_id" name="PayModeBankBID"
+                                        value="{{ request('PayModeBankBID') }}">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form_item">
+                                    <label for="prn">Count</label>
+                                    <select data-column="0" class="form-select filter-select" name="count" id="dropdown"
+                                        placeholder="Select Count">
+                                        <option value="all" {{ $selectedCount==='all' ? 'selected' : '' }}>All</option>
+                                        <option value="100" {{ $selectedCount==='100' ? 'selected' : '' }}>Top 100
+                                        </option>
+                                        <option value="500" {{ $selectedCount==='500' ? 'selected' : '' }}>Top 500
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="form_item">
+                                    <label for="department">Status:</label>
+                                    <select class="form-select filter-select" name="STATUS" id="status">
+                                        <option value="">All</option>
+                                        <option value="SUCCESS">SUCCESS</option>
+                                        <option value="FAILED">FAILED</option>
+                                        <option value="Pending">PENDING</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <button type="submit" name="search" class="btn btn-primary">Search</button>
+                                <button type="button" class="btn btn-primary">
+                                    <a href="{{ url('search_transaction') }}">Reset</span>
+                                    </a></button>
+                            </div>
+                        </form>
+                        @endif
+
                 </div>
                 @if ($searched)
                 @if ($results->isNotEmpty())
@@ -307,14 +457,14 @@ $hasPermission = false;
                         </tr>
                     </thead>
                     <tbody>
+                        @if(session('roleId') == 1)
                         @foreach ($results as $result)
                         <tr>
-                            {{-- <td>{{ $result->created_at }}</td> --}}
                             <td>{{ $result->created_at->format('d/m/Y') }}</td>
                             <td>{{ $result->PRN }}</td>
                             <td>{{ $result->RemitterName }}</td>
                             <td>{{ $result->RemitterMobile }}</td>
-                            <td>{{ $result->scheme?->SchemeName }}</td>
+                            <td>{{ $result->SchemeName }}</td>
                             <td style="display:flex;justify-content: space-evenly;">
                                 @if ($result->STATUS == 'SUCCESS')
                                 <span style="font-weight:700" class="text-success">{{ $result->STATUS }}</span>
@@ -346,6 +496,50 @@ $hasPermission = false;
                             </td>
                         </tr>
                         @endforeach
+                        {{-- @else --}}
+                        @elseif(session('roleId') == 2 || session('roleId') == 3 || session('roleId') == 4)
+                        @foreach ($results as $result)
+                        <tr>
+                            <td>{{ $result->created_at->format('d/m/Y') }}</td>
+                            <td>{{ $result->PRN }}</td>
+                            <td>{{ $result->RemitterName }}</td>
+                            <td>{{ $result->RemitterMobile }}</td>
+                            <td>{{ $result->SchemeName }}</td>
+                            <td style="display:flex;justify-content: space-evenly;">
+                                @if ($result->STATUS == 'SUCCESS')
+                                <span style="font-weight:700" class="text-success">{{ $result->STATUS }}</span>
+                                <a href="{{ url('Pdf_Format?prn=' . $result->PRN) }}" target="_blank">
+                                    <i class="bi bi-file-earmark-pdf-fill" aria-hidden="true"
+                                        style="color: #2f2f74; font-size: larger;" data-bs-toggle="tooltip"
+                                        data-bs-placement="bottom" title="Download PDF"></i>
+                                </a>
+                                @else
+                                <span class="text-danger" style="font-weight:700">{{ $result->STATUS }}</span>
+                                <a href="#" onclick="event.preventDefault(); submitVerifyForm({{ $result->PRN }})">
+                                    <i class="bi bi-hourglass-top" aria-hidden="true"
+                                        style="color: #2f2f74; font-size: larger;" data-bs-toggle="tooltip"
+                                        data-bs-placement="bottom" title="Verify"></i>
+                                </a>
+                                <form id="verifyForm_{{ $result->PRN }}" action="{{ url('/verify') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                    <input type="hidden" name="PRN" value="{{ $result->PRN }}">
+                                    <input type="hidden" name="AMOUNT" value="{{ $result->AMOUNT }}">
+                                </form>
+                                @php
+                                dd($result);
+                                @endphp
+                                <script>
+                                    function submitVerifyForm(prn) {
+                                            var form = document.getElementById('verifyForm_' + prn);
+                                            form.submit();
+                                        }
+                                </script>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
                 @else

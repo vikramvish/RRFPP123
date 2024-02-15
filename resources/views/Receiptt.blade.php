@@ -10,12 +10,7 @@
     <link href="{{ URL::asset('css1/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css1/styles1.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css1/owl.carousel.min.css') }}" rel="stylesheet">
-
-    <script type="text/javascript" src="{{ URL::asset('js2/jquery-3.6.1.min.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js2/popper.min.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js2/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js2/owl.carousel.min.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js2/datatables.min.js') }}"></script>
+    <link href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <script>
         window.onload = function() {
             document.getElementById("preloader").style.display = "none";
@@ -33,17 +28,19 @@
                 display: none;
             }
         }
+
         .print {
             background: #2f2f74;
-    border-radius: 50px;
-    color: #fff;
-    padding: 0px 15px;
-    height: 34px;
-    min-width: 20px;
-    margin: 0px auto;
-    display: block;
-    font-size: 15px;
+            border-radius: 50px;
+            color: #fff;
+            padding: 0px 15px;
+            height: 34px;
+            min-width: 20px;
+            margin: 0px auto;
+            display: block;
+            font-size: 15px;
         }
+
         .causes-grid ul li:nth-child(3n+1) {
             clear: both;
         }
@@ -125,31 +122,35 @@
                                     <p>Get Receipt</p>
                                 </div>
                                 <div class="card-body">
-                                    <form action="{{ url('/Receiptt') }}" id="submit_form" method="GET" class="receipt_form">
+                                    <form action="{{ url('/Receiptt') }}" id="submit_form" method="GET"
+                                        class="receipt_form">
                                         <div class="form_coll">
-                                            <label>Search Based On Mobile No. or PRN</label>
-                                            <input type="text" name="mobile_number" placeholder="Enter Mobile Number">
+                                            <label style="font-size: 18PX; font-weight:500;">Search based on PRN or Mobile no</label>
                                             <input type="text" name="prn_number" placeholder="Enter PRN Number">
-                                           
+                                            <input type="text" name="mobile_number" placeholder="Enter Mobile Number">   
                                         </div>
                                         <div class="receipt_btn_box">
-                                            <button type="submit" class="btn btn-primary" style="background: #2f2f74; border-radius: 50px; color: #fff; padding: 0px 25px; border: none; height: 40px; font-size: 18px; text-align: center; text-decoration: none;display:grid;">
-                                                <span style="display: block; margin-top: 8px;">Search</span>
+                                            <button type="submit" class="btn btn-primary"
+                                                style="background: #2f2f74; border-radius: 50px; color: #fff; padding: 0px 25px; border: none; height: 40px; font-size: 18px; text-align: center; text-decoration: none;">
+                                                <span style="display: block;">Search</span>
                                             </button>
-                                            <a href="{{ url('Receiptt') }}" style="background: #2f2f74; border-radius: 50px; color: #fff; padding: 0px 25px; border: none; height: 40px; display: block; font-size: 18px; text-align: center; text-decoration: none;margin-right: 15px;">
+                                            <a href="{{ url('Receiptt') }}"
+                                                style="background: #2f2f74; border-radius: 50px; color: #fff; padding: 0px 25px; border: none; height: 40px; display: block; font-size: 18px; text-align: center; text-decoration: none;margin-right: 5px;">
                                                 <span style="display: block; margin-top: 8px;">Reset</span>
                                             </a>
-                                            <a href="{{ url('/website') }}" style="background: #2f2f74; border-radius: 50px; color: #fff; padding: 0px 25px; border: none; height: 40px; display: block; font-size: 18px; text-align: center; text-decoration: none;">
+                                            <a href="{{ url('/website') }}"
+                                                style="background: #2f2f74; border-radius: 50px; color: #fff; padding: 0px 25px; border: none; height: 40px; display: block; font-size: 18px; text-align: center; text-decoration: none;">
                                                 <span style="display: block; margin-top: 8px;">Back</span>
                                             </a>
                                         </div>
                                     </form>
                                 </div>
-                                
+
                                 <div class="data_section">
                                     <div class="container">
                                         @if (isset($countries))
-                                        <table id="monthly_report" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <table id="monthly_report" class="table table-striped table-bordered"
+                                            cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th>Date</th>
@@ -169,35 +170,38 @@
                                                     <td>{{ $country->RemitterName }}</td>
                                                     <td>{{ $country->RemitterMobile }}</td>
                                                     <td>{{ $country->PaidAmount }}</td>
-                                                    {{-- <td style="display:flex;justify-content: space-evenly;">
-                                                        @if ($country->STATUS == 'SUCCESS')
-                                                        <span style="font-weight:500" class="text-success">{{ $country->STATUS }}</span>
-                                                        <a href="{{ url('Pdf_Format?prn='.$country->PRN) }}" class="btn btn-primary">Print PDF</a>
-                                                        @else
-                                                        <span class="text-danger" style="font-weight:500">{{ $country->STATUS }}</span>
-                                                        @endif
-                                                    </td> --}}
                                                     <td style="display:flex;justify-content: space-evenly;">
                                                         @if ($country->STATUS == 'SUCCESS')
-                                                            <span style="font-weight:700" class="text-success">{{ $country->STATUS }}</span>
-                                                            <a href="{{ url('Pdf_Format?prn='.$country->PRN) }}" target="_blank"> <i class="bi bi-file-earmark-pdf-fill"
-                                                                aria-hidden="true"
+                                                        <span style="font-weight:700" class="text-success">{{
+                                                            $country->STATUS }}</span>
+                                                        <a href="{{ url('Pdf?prn='.$country->PRN) }}" target="_blank">
+                                                            <i class="bi bi-file-earmark-pdf-fill" aria-hidden="true"
                                                                 style="color: #2f2f74; font-size: larger;"
-                                                                data-bs-toggle="tooltip"
-                                                                data-bs-placement="bottom"
+                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                 title="Download PDF"></i>
                                                         </a>
-                                                        @else
-                                                            <span class="text-danger" style="font-weight:700">{{ $country->STATUS }}</span>
-                                                            <a href="" target="_blank"><i class="bi bi-hourglass-top"
-                                                                aria-hidden="true"
+                                                        @elseif ($country->STATUS == 'PENDING')
+                                                        <span style="font-weight:700; color: #689cbe;">{{
+                                                            $country->STATUS
+                                                            }}</span>
+                                                        <a href="" target="_blank">
+                                                            {{-- <i class="bi bi-hourglass-top" aria-hidden="true"
                                                                 style="color: #2f2f74; font-size: larger;"
-                                                                data-bs-toggle="tooltip"
-                                                                data-bs-placement="bottom"
-                                                                title="Verify"></i>
+                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                title="Verify"></i> --}}
+                                                        </a>
+                                                        @else
+                                                        <span class="text-danger" style="font-weight:700">{{
+                                                            $country->STATUS }}</span>
+                                                        <a href="" target="_blank">
+                                                            {{-- <i class="bi bi-hourglass-top" aria-hidden="true"
+                                                                style="color: #2f2f74; font-size: larger;"
+                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                title="Verify"></i> --}}
                                                         </a>
                                                         @endif
                                                     </td>
+
                                                 </tr>
                                                 @endforeach
                                                 @else
@@ -215,15 +219,21 @@
                                         @endif
                                     </div>
                                 </div>
-                                
-            </div>
-    </div>
-    </section>
+
+                            </div>
+                        </div>
+        </section>
     </div>
 
     <footer>
         @include('website.footer')
     </footer>
+<script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('js2/jquery-3.6.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js2/popper.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js2/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js2/owl.carousel.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js2/datatables.min.js') }}"></script>
     <script>
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
@@ -236,7 +246,7 @@
         }
     </script>
     <script>
-        $('.recentcausesSlider').owlCarousel({
+        $('.partnersSlider').owlCarousel({
             loop: true,
             margin: 10,
             nav: true,
@@ -254,8 +264,8 @@
             }
         })
     </script>
-<script>
-    function printPDF(url) {
+    <script>
+        function printPDF(url) {
         if (confirm('Print this PDF?')) {
             const win = window.open(url, '_blank');
             win.onload = function() {
@@ -263,7 +273,7 @@
             };
         }
     }
-</script>
+    </script>
     {{-- script to show all data in datatable --}}
     {{-- <script>
         $(document).ready(function() {
@@ -276,21 +286,7 @@
         });
     </script> --}}
     <script>
-        $(document).ready(function() {
-            $('#monthly_report').dataTable({
-                searching: true,
-                paging: true,
-                dom: 'lBfrtip', //* l = length, B = button, f = fillter, r = processing, t = table, i = information, p = pagination
-                info: true,
-                buttons: [
-                    //'copy',
-                    'excel',
-                    'csv',
-                    'pdf',
-                    //'print'
-                ]
-            });
-        });
+     let table = new DataTable('#monthly_report');
     </script>
     <script>
         $(document).ready(function() {

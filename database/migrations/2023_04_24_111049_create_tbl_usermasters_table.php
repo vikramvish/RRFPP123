@@ -12,18 +12,20 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::create('tbl_usermasters', function (Blueprint $table) {
-            $table->id();
-            $table->string('UserName');
-            $table->string('displayName');
-            $table->string('designation');
-            $table->unsignedBigInteger('RoleId');
-            $table->foreign('RoleId')->references('RoleId')->on('tbl_rolemasters')->onDelete('cascade');
-            $table->string('IsActive');
-            $table->timestamps();
-        });
-    }
+{
+    Schema::create('tbl_usermasters', function (Blueprint $table) {
+        $table->bigIncrements('user_id');
+        $table->string('UserName');
+        $table->string('displayName');
+        $table->string('designation');
+        $table->unsignedBigInteger('RoleId');
+        $table->unsignedBigInteger('DepartmentId');
+        $table->foreign('RoleId')->references('RoleId')->on('tbl_rolemasters')->onDelete('cascade');
+        $table->foreign('DepartmentId')->references('DepartmentId')->on('tbl_departmentmasters')->onDelete('cascade');
+        $table->string('IsActive');
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.
@@ -34,4 +36,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('tbl_usermasters');
     }
+    
 };

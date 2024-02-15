@@ -59,7 +59,7 @@
                                 {{ session('error') }}
                             </div>
                         @endif
-                            <form action="{{ url('/website-dept') }}" method="post">
+                            <form action="{{ url('/confirm-info') }}" method="post">
                                 @csrf
                                 <div class="form_box">
                                     <h3><span>Personal Information</span></h3>
@@ -108,7 +108,7 @@
                                     </div>
                                     <div class="form-item">
                                         <label class="form-label">Amount</label>
-                                        <input type="text" class="form-control"
+                                        <input type="number" maxlength="11" class="form-control"
                                             value="{{ request()->TransactionAmount }}" id="amount"
                                             name="TransactionAmount" readonly>
                                     </div>
@@ -139,7 +139,7 @@
         event.preventDefault(); // Prevent the form from submitting normally
 
         // Submit the form via AJAX request
-        fetch('{{ url('/website-dept') }}', {
+        fetch('{{ url('/confirm-info') }}', {
             method: 'POST',
             body: new FormData(event.target)
         })

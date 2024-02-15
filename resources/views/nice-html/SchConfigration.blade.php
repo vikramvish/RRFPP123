@@ -78,10 +78,11 @@ $hasPermission = false;
                     <a class="btn btn-primary" href="{{ url('schemeshow') }}" role="button">Back</a>
                 </div>
             </div>
-        </div>
+        
         <div class="fillter">
             <form action="" method="GET" id="fillter_data">
                 <div class="filler_coll">
+                    @if(session('roleId') == 1)
                     <select class="form-select" name="scheme" id="dropdown" placeholder="Select Scheme">
                         <option value="all">All Scheme</option>
                         @if (count($dept) > 0)
@@ -91,6 +92,17 @@ $hasPermission = false;
                         @endforeach
                         @endif
                     </select>
+                    @elseif(session('roleId') == 2 || session('roleId') == 3 || session('roleId') == 4)
+                    <select class="form-select" name="scheme" id="dropdown" placeholder="Select Scheme">
+                        <option value="all">All Scheme</option>
+                        @if (count($dept) > 0)
+                        @foreach ($dept as $schemes)
+                        <option value="{{ $schemes->SchemeName }}">
+                            {{ $schemes->SchemeName }}</option>
+                        @endforeach
+                        @endif
+                    </select>
+                    @endif
                 </div>
             </form>
         </div>
@@ -111,6 +123,7 @@ $hasPermission = false;
                         </tr>
                     </thead>
                     <tbody>
+                        @if(session('roleId') == 1)
                         @foreach ($user as $users)
                         <tr>
                             {{-- <td class="txt-oflo">{{ $users->SchemeId }}</td> --}}
@@ -125,6 +138,22 @@ $hasPermission = false;
                             </td>
                         </tr>
                         @endforeach
+                        @elseif(session('roleId') == 2 || session('roleId') == 3 || session('roleId') == 4)
+                        @foreach ($user as $users)
+                        <tr>
+                            {{-- <td class="txt-oflo">{{ $users->SchemeId }}</td> --}}
+                            <td class="txt-oflo">{{ $users['SchemeName'] }}</td>
+                            <td class="txt-oflo">{{ $users->MerchantCode }}</td>
+                            <td class="txt-oflo">{{ $users->BankAccountNumber }}</td>
+                            <td class="txt-oflo">{{ $users->BankAccountIFSC }}</td>
+                            <td style="text-align: center">
+                                <a class="btn" href="{{ url('addSch_config/' . $users->SchemeId) }}">
+                                    <button type="button" value="" class="btn btn-primary editbtn btn-sm"
+                                        data-toggle="modal" data-target="#exampleModal">Edit</button></a>
+                            </td>
+                        </tr>
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

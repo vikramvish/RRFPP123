@@ -7,14 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class tbl_usermaster extends Model
 {
+    protected $primaryKey = 'user_id';
     use HasFactory;
     protected $fillable = [  
-        'id',
+        'user_id',
         'SSOID',         
         'displayName',
         'designation',  
-        'RoleId', 
+        'RoleId',
+        'DepartmentId', 
         'IsActive',   
         'CreatedAt',      
     ];
+    public function departments()
+    {
+        return $this->belongsToMany(tbl_departmentmaster::class, 'tbl_departmentusers', 'user_id', 'DepartmentId');
+    }
+    // public function departmentUsers()
+    // {
+    //     return $this->hasMany(tbl_departmentuser::class, 'user_id', 'user_id');
+    // }
 }

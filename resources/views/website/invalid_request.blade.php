@@ -86,7 +86,6 @@
         </head>
 
         <body>
-            {{-- <div class="alert alert-danger">You are not authorized to access this page.</div>   --}}
             <div class="text-wrapper">
                 <div class="title" data-content="404">
                     404 - Oops, Invalid Request
@@ -94,13 +93,7 @@
                 <div class="subtitle">
                     ACCESS DENIED.
                 </div>
-                {{-- <div class="isi">
-                    You have To take Permission from <span style="color: #1FA9D6;font-size: 25px;"> super admin </span>
-                    to access this page.!
-                </div> --}}
-                {{-- <div class="buttons">
-                    <a class="button" href="{{ url('/website') }}">Go to Home</a>
-                </div> --}}
+              
             </div>
         </body>
 

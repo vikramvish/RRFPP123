@@ -12,7 +12,7 @@ class tbl_pgrequestlog extends Model
     // {
     //     return $this->belongsTo(tbl_transactiondetail::class);
     // }
-    protected $primarykey = 'RequestId';
+    protected $primaryKey = 'RequestId';
     protected $fillable = [  
         'RequestId',
         'PRN',         

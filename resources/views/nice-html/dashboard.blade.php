@@ -2,9 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    {{-- <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-            <meta http-equiv="Pragma" content="no-cache">
-            <meta http-equiv="Expires" content="0"> --}}
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +17,7 @@
             text-align: center;
         }
     </style>
-     <script>
+    <script>
         window.onload = function() {
             document.getElementById("preloader").style.display = "none";
         }
@@ -74,13 +71,14 @@
                 transform: rotate(360deg);
             }
         }
+
+        footer {
+            margin-top: 224px;
+        }
     </style>
 </head>
 
 <body>
-    {{-- if (session('userRights') === null) {
-                return redirect()->route('login');
-            } --}}
 
     <header>
         <div id="preloader">
@@ -91,69 +89,6 @@
         </div>
         <div class="bottom_header">
             <div class="container">
-                {{-- {{ session('valid') }} 
-                        {{ session('msg') }}  --}}
-                {{-- <nav class="navbar navbar-expand-lg">
-                    <div class="">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="{{ url('dashboard') }}"><span
-                                            class="nav_icon"><i class="bi bi-house-heart-fill"></i></span> Dashboard</a>
-                                </li>
-                                @if (checkPermission('MANAGEMENT_CMS'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ url('addSchDept') }}"><span class="nav_icon"><i
-                                                    class="bi bi-building"></i></span> CMS Management</a>
-                                    </li>
-                                @endif
-                                {{-- <li class="nav-item">
-                                            <a class="nav-link" href="#"><span class="nav_icon"><i
-                                                        class="bi bi-bar-chart-line"></i></span> Transaction</a>
-                                        </li> --}}
-                {{-- <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <span class="nav_icon"><i class="bi bi-bank"></i></span>Management
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        @if (checkPermission('MANAGEMENT_DEPARTMENT'))
-                                            <li><a class="dropdown-item" href="{{ url('departmentshow') }}"><span
-                                                        class="nav_icon"><i class="bi bi-info-circle-fill"></i></span>
-                                                    Department Management</a></li>
-                                        @endif
-                                        @if (checkPermission('MANAGEMENT_SCHEME'))
-                                            <li><a class="dropdown-item" href="{{ url('schemeshow') }}"><span
-                                                        class="nav_icon"><i class="bi bi-info-circle-fill"></i></span>
-                                                    Scheme Management</a></li> --}}
-                {{-- @endif
-                                        @if (checkPermission('MANAGEMENT_SCHEME_CONFIGRATION'))
-                                            <li><a class="dropdown-item" href="{{ url('SchConfigration') }}"><span
-                                                        class="nav_icon"><i
-                                                            class="bi bi-info-circle-fill"></i></span>Scheme
-                                                    Configrations</a>
-                                            </li>
-                                        @endif
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    @if (checkPermission('SYSTEM_SSO_USER'))
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <span class="nav_icon"><i class="bi bi-command"></i></span> System
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <li><a class="dropdown-item" href="{{ url('SSOmaping') }}"><span
-                                                        class="nav_icon"><i class="bi bi bi-geo"></i></span>SSO
-                                                    User</a></li>
-                                        </ul>
-                                    @endif --}}
-                {{-- </li>  --}}
 
                 <nav class="navbar navbar-expand-lg">
                     <div class="">
@@ -163,7 +98,7 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         {{-- navigation bar included from navbar.blade.php --}}
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">                           
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             @include('nice-html.navbar')
                         </div>
                     </div>
@@ -172,24 +107,27 @@
         </div>
     </header>
     <div class="main_section dashboard">
+
         <div class="top_bar">
             <div class="container">
                 <div class="custom_row">
+                    @if(session('roleId') == 1)
+                    <!-- Show data for RoleId 1 -->
                     <div class="topbar_box">
                         <div class="card td">
                             <button type="button">
                                 <div class="card_title"><span class="icon"><i class="bi bi-building"></i></span>
                                     Department</div>
-                                <span class="value">{{ $count }}</span>
+                                <span class="value">{{ $countDepartment }}</span>
                             </button>
                         </div>
                     </div>
                     <div class="topbar_box">
                         <div class="card ts">
                             <button type="button">
-                                <div class="card_title"><span class="icon"><i
-                                            class="charity-love_hearts"></i></span> Schemes</div>
-                                <span class="value">{{ $schemes }}</span>
+                                <div class="card_title"><span class="icon"><i class="charity-love_hearts"></i></span>
+                                    Schemes</div>
+                                <span class="value">{{ $countScheme }}</span>
                             </button>
                         </div>
                     </div>
@@ -205,73 +143,88 @@
                     <div class="topbar_box">
                         <div class="card ta">
                             <button type="button">
-                                <div class="card_title"><span class="icon"><i
-                                            class="bi bi-bar-chart-line"></i></i></span> Total Transaction
-                                </div>
-                                <span class="value">{{ $transaction }}</span>
+                                <div class="card_title"><span class="icon"><i class="bi bi-bar-chart-line"></i></span>
+                                    Total Transaction</div>
+                                <span class="value">{{ $transactionCount }}</span>
                             </button>
                         </div>
                     </div>
-
                     <div class="topbar_box">
                         <div class="card tdo">
                             <button type="button">
-                                <div class="card_title"><span class="icon"><i class="charity-gift_box"></i></span>
-                                    Total Donation</div>
-                                <span class="value">{{ $balance }}</span>
+                                <div class="card_title"><span class="icon"><i class="charity-gift_box"></i></span> Total
+                                    Donation</div>
+                                <span class="value">{{ $transactionAmount }}</span>
                             </button>
                         </div>
                     </div>
+                    @elseif(session('roleId') == 2 || session('roleId') == 3 || session('roleId') == 4)
+                    <!-- Show data for RoleId 2, 3, or 4 -->
+                    <div class="topbar_box">
+                        <div class="card td">
+                            <button type="button">
+                                <div class="card_title"><span class="icon"><i class="bi bi-building"></i></span>
+                                    Department</div>
+                                <span class="value">{{ $countDepartment }}</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="topbar_box">
+                        <div class="card ts">
+                            <button type="button">
+                                <div class="card_title"><span class="icon"><i class="charity-love_hearts"></i></span>
+                                    Schemes</div>
+                                <span class="value">{{ $countScheme }}</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="topbar_box">
+                        <div class="card na">
+                            <button type="button">
+                                <div class="card_title"><span class="icon"><i
+                                            class="charity-volunteer_people"></i></span> Newly Added</div>
+                                <span class="value">0</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="topbar_box">
+                        <div class="card ta">
+                            <button type="button">
+                                <div class="card_title"><span class="icon"><i class="bi bi-bar-chart-line"></i></span>
+                                    Total Transaction</div>
+                                <span class="value">{{ $transactionCount }}</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="topbar_box">
+                        <div class="card tdo">
+                            <button type="button">
+                                <div class="card_title"><span class="icon"><i class="charity-gift_box"></i></span> Total
+                                    Donation</div>
+                                <span class="value">{{ $transactionAmount }}</span>
+                            </button>
+                        </div>
+                    </div>
+                    @else
+                    <!-- Invalid RoleId -->
+                    <div class="topbar_box">
+                        <div class="card td">
+                            <button type="button">
+                                <div class="card_title"><span class="icon"><i class="bi bi-building"></i></span>
+                                    Department</div>
+                                <span class="value">0</span>
+                            </button>
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
-        {{-- <div class="data_section">
-            <div class="container">
-                <h3 class="main_title">Monthly Donation Report</h3>
-                <div class="fillter">
-                    <form id="fillter_data">
-                        </select>
-                        <select class="form-select" name="scheme" id="dropdown" placeholder="Select Scheme">
-                            <option value="all">All Scheme</option>
-                            @if (count($dept) > 0)
-                                @foreach ($dept as $schemes)
-                                    <option value="{{ $schemes->SchemeName }}">
-                                        {{ $schemes->SchemeName }}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                    </form>
-                </div>
-                <table id="monthly_report" class="table table-striped table-bordered" cellspacing="0"
-                    width="100%">
-                    <thead>
-                        <tr>
-                            <th>PRN</th>
-                            <th>Scheme</th>
-                            <th>Scheme Name Hindi</th>
-                            <th>Donnar Name</th>
-                            <th>Donnar Mobile</th>
-                            <th>Donation</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($user as $users)
-                            <tr>
-                                <td class="txt-oflo">{{ $users->PRN }}</td>
-                                <td class="txt-oflo">{{ $users->SchemeName }}</td>
-                                <td class="txt-oflo">{{ $users->SchemeNameHindi }}</td>
-                                <td class="txt-oflo">{{ $users->RemitterName }}</td>
-                                <td class="txt-oflo">{{ $users->RemitterMobile }}</td>
-                                <td class="txt-oflo">{{ $users->TransactionAmount }}</td>
-                                <td class="txt-oflo"> {{ $users->created_at }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div> --}}
-        <div class="chart_section">
+
+        {{-- {!! $chart->container() !!}
+
+        {!! $chart->script() !!} --}}
+        {{-- <div class="chart_section">
             <div class="container">
                 <div class="custom_row">
                     <div class="left_chart">
@@ -306,11 +259,11 @@
                                 <h4>Department wise</h4>
                                 <div class="right_part">
                                     <div class="graph_radio_box">
-                                        <label><input type="radio" id="department_donation"
-                                                name="department_donation" value="donation_count" checked="">
+                                        <label><input type="radio" id="department_donation" name="department_donation"
+                                                value="donation_count" checked="">
                                             <span>Count</span></label>
-                                        <label><input type="radio" id="department_donation"
-                                                name="department_donation" value="donation_amount">
+                                        <label><input type="radio" id="department_donation" name="department_donation"
+                                                value="donation_amount">
                                             <span>Amount</span></label>
                                     </div>
                                     <select>
@@ -328,7 +281,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     <footer>
         <div class="footer_top">
@@ -348,6 +301,7 @@
             </div>
         </div>
     </footer>
+
     {{-- <script type="text/javascript" src="{{ URL::asset('js3/bootstrap.bundle.min.js') }}"></script> --}}
     <script type="text/javascript" src="{{ URL::asset('js3/jquery-3.6.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js3/popper.min.js') }}"></script>
@@ -540,7 +494,7 @@
             window.location.href = "/login";
         }
     </script>
-  
+
 </body>
 
 </html>

@@ -199,7 +199,7 @@ class previewController extends Controller
     public function Annonmous(Request $request)
     {
         $request->validate([
-            'TransactionAmount' => 'required|min:2',
+            'TransactionAmount' => 'required|min:2|max:11',
         ]);
         $Form2 = new tbl_transactiondetail();
         $merchantCode = 'testMerchant2';

@@ -17,18 +17,17 @@
                 <link href="css3/styles.css" rel="stylesheet" />
                 <link href="css3/datatables.min.css" rel="stylesheet" />
                 <link href="css3/owl.carousel.min.css" rel="stylesheet" />
-                <style>
-                    button.btn.btn-primary {
-                        background: #2f2f74;
-                        border-color: #2f2f74 !important;
-                    }
-                </style>
+             
                  <script>
                     window.onload = function() {
                         document.getElementById("preloader").style.display = "none";
                     }
                 </script>
                 <style>
+                     button.btn.btn-primary {
+                        background: #2f2f74;
+                        border-color: #2f2f74 !important;
+                    }
                     .causes-grid ul li:nth-child(3n+1) {
                         clear: both;
                     }

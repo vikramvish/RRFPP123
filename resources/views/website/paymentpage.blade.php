@@ -150,21 +150,11 @@
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div id="with_info" class="tab-pane active"><br>
-                                    <form action="{{ url('website-form') }}" method="post">
+                                    <form action="{{ url('personal-info') }}" method="post">
                                         @csrf
                                         <div class="form_box">
                                             <h3><span>Personal Information</span></h3>
-                                            <div class="md-3">
-                                                {{-- <label class="form-lebel">Select Department</label> --}}
-                                                {{-- <div class="col-auto">
-                                                    <select class="form-control" id="departmentDropdown" name="department"
-                                                        placeholder="Select Scheme">
-                                                        <option value="">Select department</option>
-                                                        @foreach($dept as $department)
-                                                            <option value="{{ $department->DepartmentId }}">{{ $department->DepartmentName }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div> --}}
+                                            <div class="md-3">                                               
                                                 <label class="form-lebel">Select Scheme</label>
                                                 <div class="col-auto">
                                                     <select class="form-control" id="schemeDropdown" name="scheme"
@@ -218,7 +208,7 @@
 
                                             <div class="form-item">
                                                 <label class="form-label">Amount</label>
-                                                <input type="text" class="form-control" required="required"
+                                                <input type="number" class="form-control" required="required"
                                                     id="amount" placeholder="Enter Amount"
                                                     name="TransactionAmount" value="1000">
                                                 {!! $errors->first('TransactionAmount', '<p class="help-block">:message</p>') !!}
@@ -238,7 +228,7 @@
                                     </form>
                                 </div>
                                 <div id="without_info" class="tab-pane fade"><br>
-                                    <form action="{{ url('/website-Annonmous') }}" method="post">
+                                    <form action="{{ url('/Annonmous-user-info') }}" method="post">
                                         @csrf
                                         <div class="form_box">
                                             <h3><span>Payment Information</span></h3>
@@ -267,7 +257,7 @@
                                             </div>
                                             <div class="form-item">
                                                 <label class="form-label">Amount</label>
-                                                <input type="text" class="form-control" required="required"
+                                                <input type="number" class="form-control" required="required"
                                                     id="amount1" placeholder="Enter Amount"
                                                     name="TransactionAmount" value="1000">
                                                 {!! $errors->first('TransactionAmount', '<p class="help-block">:message</p>') !!}

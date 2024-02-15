@@ -141,21 +141,7 @@
                                     value="{{ $user->BankAccountFilePath }}">
                             </div>
                         </div>
-                            <div class="btn_row">
-                                {{-- @if (session('role') == '1')                            
-                                <input type="submit" value="Submit" class="primary_btn">
-    
-                            @elseif (session('role') == '2')
-                            <input type="submit" value="Submit" class="primary_btn" onclick="alert('This button is disabled')" disabled>
-                           
-                            @elseif (session('role') == '3')
-                                <!-- Button for condition 3 -->
-                                <input type="submit" value="Submit" class="primary_btn">
-                                    
-                            @elseif (session('role') == '4')
-                                <!-- Button for condition 4 -->
-                                <input type="submit" value="Submit" class="primary_btn">
-                            @endif     --}}
+                            <div class="btn_row">                               
                             <input type="submit" value="Submit" class="primary_btn">
                                 <a class="btn btn-primary" href="{{ url('SchConfigration') }}"
                                     role="button">Back</a>

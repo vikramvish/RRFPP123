@@ -56,7 +56,7 @@
                         <div class="preview_section">
                             <h4 style="color: red;margin-left: 11rem;font-size: 1.1rem;"><b><span style="color: #4d6fe6;font-size: 22px;">Donate :</span> Confirm before you proceed<br>
                             </h4>
-                            <form action="{{ url('/website-form2') }}" method="post">
+                            <form action="{{ url('/confirm-annonmus') }}" method="post">
                                 @csrf
                                 <div class="form_box">
                                     <h3><span>Personal Information</span></h3>

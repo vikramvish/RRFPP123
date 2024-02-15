@@ -85,7 +85,7 @@
                                                         Jaipur. In this, cash, check,dd and also online payment to help
                                                         chief minister refief
                                                         fund. </p>
-                                                    <a href="http://172.22.36.133:8000/blogpage/CMRF"
+                                                    <a href="http://172.22.36.133:8000/blog/CMRF"
                                                         class="read_more">Read
                                                         more</a>
                                                 </div>
@@ -104,7 +104,7 @@
                                                         cow and its offspring and to provide biodiversity in relation to
                                                         reproduction, breed reforms, conservation of native cow breeds
                                                         and the value addition of cow </p>
-                                                    <a href="http://172.22.36.133:8000/blogpage/Guashala"
+                                                    <a href="http://172.22.36.133:8000/blog/Guashala"
                                                         class="read_more">Read more</a>
                                                 </div>
                                             </div>
@@ -122,7 +122,7 @@
                                                         promotion of temple culture.Devasthan is a department of
                                                         conservation and promotion of temple culture.is a department of
                                                         conservation</p>
-                                                    <a href="http://172.22.36.133:8000/blogpage/Devsthan"
+                                                    <a href="http://172.22.36.133:8000/blog/Devsthan"
                                                         class="read_more">Read more</a>
                                                 </div>
                                             </div>
@@ -141,7 +141,7 @@
                                                         it. The virus that is caused by the lampy skin disease is called
                                                         Capripoxvirus. This disease occurs in cows and buffaloes. The
                                                         virus is of Gotpox and Shippox Family.</p>
-                                                    <a href="http://172.22.36.133:8000/blogpage/Lampi"
+                                                    <a href="http://172.22.36.133:8000/blog/Lampi"
                                                         class="read_more">Read more</a>
                                                 </div>
                                             </div>

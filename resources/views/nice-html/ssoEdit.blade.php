@@ -11,12 +11,48 @@
     <link href="{{ asset('css3/styles.css') }}" rel="stylesheet" />
     <link href="{{ asset('css3/datatables.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('css3/owl.carousel.min.css') }}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script>
     <style>
         .btn-primary {
             color: #fff;
             background-color: #2f2f74;
             border-color: #2f2f74;
             width: 8%;
+        }
+
+        .multiselect {
+            width: 200px;
+        }
+
+        .selectBox {
+            position: relative;
+        }
+
+        .selectBox select {
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .overSelect {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        #checkboxes {
+            display: none;
+            border: 1px #dadada solid;
+        }
+
+        #checkboxes label {
+            display: block;
+        }
+
+        #checkboxes label:hover {
+            background-color: #1e90ff;
         }
     </style>
 </head>
@@ -68,15 +104,15 @@
                 </div>
                 <div class="card-body">
                     @if (Session::has('success'))
-                        <div class="alert alert-success">{{ Session::get('success') }}</div>
+                    <div class="alert alert-success">{{ Session::get('success') }}</div>
                     @endif
                     @if (Session::has('fail'))
-                        <div class="alert alert-danger">{{ Session::get('fail') }}</div>
+                    <div class="alert alert-danger">{{ Session::get('fail') }}</div>
                     @endif
-                    <form action="{{ url('sso-Edit/' . $user->id) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ url('sso-Edit/' . $user->user_id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <input type="hidden" name="id" value="{{ $user->id }}">
+                        <input type="hidden" name="user_id" value="{{ $user->user_id }}">
                         <div class="form_row">
                             <div class="form_item">
                                 <label>SSOID</label>
@@ -99,42 +135,59 @@
                             <div class="form_item">
                                 <select name="RoleId" id="RoleId" class="form-select" style="margin-top: 29px;">
                                     @foreach ($roles as $role)
-                                        <option value="{{ $role->RoleId }}">{{ $role->RoleName }}</option>
+                                    <option value="{{ $role->RoleId }}" {{ $role->RoleId == $user->RoleId ? 'selected' :
+                                        '' }}>
+                                        {{ $role->RoleName }}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="form_row">
+
+
                             <div class="form_item" style="margin-top: 28px;">
-                                {{-- <input type="hidden" name="IsActive" value="0" />  --}}
+                                {{-- <input type="hidden" name="IsActive" value="0" /> --}}
                                 <input data-id="{{ $user->id }}" name="IsActive" class="form-check-input"
-                                    type="checkbox" value="1" id="flexCheckChecked"
-                                    {{ $user->IsActive || old('IsActive', 0) === 1 ? 'checked' : '' }}>
+                                    type="checkbox" value="1" id="flexCheckChecked" {{ $user->IsActive ||
+                                old('IsActive', 0) === 1 ? 'checked' : '' }}>
                                 <label class="form-check-label" for="flexCheckChecked">
                                     Status
                                 </label>
                             </div>
-                        </div>
-                        <div class="btn_row">
-                            {{-- @if (session('role') == '1')
-                                <input type="submit" value="submit" class="primary_btn">
-                            @elseif (session('role') == '2')
-                                <input type="submit" value="submit" class="primary_btn"
-                                    onclick="alert('This button is disabled')" disabled>
-                            @elseif (session('role') == '3')
-                                <!-- Button for condition 3 -->
-                                <input type="submit" value="submit 3" class="primary_btn">
-                            @elseif (session('role') == '4')
-                                <!-- Button for condition 4 -->
-                                <input type="submit" value="submit 4" class="primary_btn">
-                            @endif --}}
-                            <input type="submit" value="submit" class="primary_btn">
-                            <a class="btn btn-primary" href="{{ url('SSOmaping') }}" role="button">Back</a>
-                        </div>
-                    </form>
-                </div>
+                            {{-- <select name="DepartmentId" id="DepartmentId" class="form-select"
+                                style="margin-top: 29px;">
+                                @foreach ($departments as $department)
+                                @if ($department->IsActive == 1)
+                                <option value="{{ $department->DepartmentId }}" {{ $department->DepartmentId ==
+                                    $user->DepartmentId ? 'selected' : '' }}>
+                                    {{ $department->DepartmentName }}
+                                </option>
+                                @endif
+                                @endforeach
+                            </select> --}}
+                        </div>                     
             </div>
+            <div class="btn_row">
+                {{-- @if (session('role') == '1')
+                <input type="submit" value="submit" class="primary_btn">
+                @elseif (session('role') == '2')
+                <input type="submit" value="submit" class="primary_btn" onclick="alert('This button is disabled')"
+                    disabled>
+                @elseif (session('role') == '3')
+                <!-- Button for condition 3 -->
+                <input type="submit" value="submit 3" class="primary_btn">
+                @elseif (session('role') == '4')
+                <!-- Button for condition 4 -->
+                <input type="submit" value="submit 4" class="primary_btn">
+                @endif --}}
+                <input type="submit" value="submit" class="primary_btn">
+                <a class="btn btn-primary" href="{{ url('SSOmaping') }}" role="button">Back</a>
+            </div>
+            </form>
         </div>
+    </div>
+    </div>
     </div>
     <footer>
         <div class="footer_top">
@@ -154,7 +207,22 @@
             </div>
         </div>
     </footer>
-
+    <script>
+        function showCheckboxes(target) {
+            var checkboxes;
+            if (target === 'departments') {
+                checkboxes = document.getElementById("checkboxesDepartments");
+            } else if (target === 'roles') {
+                checkboxes = document.getElementById("checkboxesRoles");
+            }
+            
+            if (checkboxes.style.display === "block") {
+                checkboxes.style.display = "none";
+            } else {
+                checkboxes.style.display = "block";
+            }
+        }
+    </script>
     <script type="text/javascript" src="{{ URL::asset('js3/jquery-3.6.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js3/popper.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js3/bootstrap.min.js') }}"></script>

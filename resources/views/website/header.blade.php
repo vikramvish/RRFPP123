@@ -22,7 +22,7 @@
             @elseif (request()->is('paymentpage/*'))
                 <li><a href="{{ url('#') }}" class="donate"><span class="menu_icon"><i
                                 class="bi bi-heart-fill"></i></span>Donate Now</a></li>
-            @elseif (request()->is('blogpage/*'))
+            @elseif (request()->is('blog/*'))
                 <li><a href="{{ url('paymentpage/' . $slug) }}" class="donate"><span class="menu_icon"><i
                                 class="bi bi-heart-fill"></i></span>Donate Now</a></li>
             @else

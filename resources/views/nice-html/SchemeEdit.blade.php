@@ -95,14 +95,29 @@
                         <div class="form_row">                           
                             <div class="form_item">
                                 <label>Department</label>
+                                @if(session('roleId') == 1)
                                 <select id="department-select" name="DepartmentId" class="form-control" required>
                                     <option value="">Select department</option>
                                     @foreach($departments as $department)
+                                    @if ($department->IsActive == 1)
                                         <option value="{{ $department->DepartmentId }}" {{ $department->DepartmentId == $user->DepartmentId ? 'selected' : '' }}>
                                             {{ $department->DepartmentName }}
                                         </option>
+                                        @endif
                                     @endforeach
                                 </select>
+                                @elseif(session('roleId') == 2 || session('roleId') == 3 || session('roleId') == 4)
+                                <select id="department-select" name="DepartmentId" class="form-control" required>
+                                    {{-- <option value="">Select department</option> --}}
+                                    @foreach($departments as $department)
+                                    @if ($department->IsActive == 1)
+                                        <option value="{{ $department->DepartmentId }}" {{ $department->DepartmentId == $user->DepartmentId ? 'selected' : '' }}>
+                                            {{ $department->DepartmentName }}
+                                        </option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @endif
                             </div>
                             <div class="form_item" style="margin-top: 28px;">
                                 {{-- <input type="hidden" name="IsActive" value="0" />  --}}
@@ -114,21 +129,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="btn_row">
-                            {{-- @if (session('role') == '1')                            
-                            <input type="submit" value="Submit" class="primary_btn">
-
-                        @elseif (session('role') == '2')
-                        <input type="submit" value="Submit" class="primary_btn" onclick="alert('This button is disabled')" disabled>
-                       
-                        @elseif (session('role') == '3')
-                            <!-- Button for condition 3 -->
-                            <input type="submit" value="Submit" class="primary_btn">
-                                
-                        @elseif (session('role') == '4')
-                            <!-- Button for condition 4 -->
-                            <input type="submit" value="Submit" class="primary_btn">
-                        @endif     --}}
+                        <div class="btn_row">                          
                         <input type="submit" value="Submit" class="primary_btn">
                             <a class="btn btn-primary" href="{{ url('schemeshow') }}" role="button">Back</a>
                         </div>

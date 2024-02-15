@@ -62,13 +62,22 @@
                         @csrf
                         <div class="form_row">
                             <div class="form_item full">
-                                <label>Select Department</label>
+                                {{-- <label>Select Department</label> --}}
+                                @if(session('roleId') == 1)
                                 <select class="form-select" name="department">
                                     @foreach ($department as $departments)
                                         <option value="{{ $departments->DepartmentId }}">
                                             {{ $departments->DepartmentName }}</option>
                                     @endforeach
                                 </select>
+                                @elseif(session('roleId') == 2 || session('roleId') == 3 || session('roleId') == 4)
+                                <select class="form-select" name="department">
+                                    @foreach ($department as $departments)
+                                        <option value="{{ $departments->DepartmentId }}">
+                                            {{ $departments->DepartmentName }}</option>
+                                    @endforeach
+                                </select>
+                                @endif
                             </div>
                         </div>
                         <div class="form_row">
@@ -91,15 +100,7 @@
                             <label class="form-check-label" for="flexCheckChecked">
                                 Status
                             </label>
-                        </div>
-                        {{-- <div class="form_row">
-                            <div class="form_item full">
-                                <label>Active</label>
-                                <input data-id="" class="toggle-class" type="checkbox" data-onstyle="success"
-                                    data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive"
-                                    checked>
-                            </div>
-                        </div> --}}
+                        </div>                       
                         <div class="btn_row">
                             {{-- @if (session('role') == '1')                            
                             <input type="submit" value="Submit" class="primary_btn">

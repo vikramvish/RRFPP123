@@ -7,15 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class tbl_pgresponselog extends Model
 {
+    protected $primarykey = 'id';
     use HasFactory;
-    protected $fillable = [  
-        'RequestId ',
-        'ResponseMethod ',         
-        'Referrer ',
+    protected $fillable = [ 
+        'id',
+        'RequestId',
+        'ResponseMethod',         
+        'Referrer',
         'EncryptedResponse',       
         'DecryptedResponse',
         'PaidAmount',        
-        'CreatedAt ',             
+        'CreatedAt',             
         'UpdatedAt',              
     ];
 }

@@ -16,10 +16,11 @@ class RedirectIfAuthenticated {
     * @param  string|null  ...$guards
     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
     */
-    public function handle( Request $request, Closure $next )
+    public function handle( Request $request, Closure $next, $guard = null )
     {
-        if (Auth::check()) {
-            return redirect('/dashbaord');
+        if (Auth::guard($guard)->check()) {
+            // If the user is authenticated, redirect to the dashboard
+            return redirect('/dashboard');
         }
 
         return $next( $request );

@@ -227,7 +227,7 @@ section.banner img {
     opacity: 0.5;
 }
 .main_section .container {
-    max-width: 1170px;
+    max-width: 1100px;
 }
 .about_section .title_section .title_righ {
     position: absolute;
@@ -1049,7 +1049,7 @@ form.receipt_form label {
     margin-bottom: 10px;
 }
 form.receipt_form input[type="text"] {
-    width: 85%;
+    width: 49%;
     margin-bottom: 15px;
     height: 35px;
     padding: 0px 10px;
@@ -1073,7 +1073,7 @@ form.receipt_form div.receipt_btn_box button {
     padding: 0px 25px;
     border: none;
     height: 40px;
-    min-width: 150px;
+    /* min-width: 150px; */
     display: block;
     font-size: 18px;
 }

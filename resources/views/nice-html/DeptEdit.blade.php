@@ -110,19 +110,6 @@
                             </label>
                         </div>
                         <div class="btn_row">
-
-                            {{-- @if (session('role') == '1')
-                            <input type="submit" value="submit" class="primary_btn">
-                            @elseif (session('role') == '2')
-                            <input type="submit" value="submit" class="primary_btn"
-                                onclick="alert('This button is disabled')" disabled>
-                            @elseif (session('role') == '3')
-                            <!-- Button for condition 3 -->
-                            <input type="submit" value="submit 3" class="primary_btn">
-                            @elseif (session('role') == '4')
-                            <!-- Button for condition 4 -->
-                            <input type="submit" value="submit 4" class="primary_btn">
-                            @endif --}}
                             <input type="submit" value="Submit" class="primary_btn">
                             <a class="btn btn-primary" href="{{ url('departmentshow') }}" role="button">Back</a>
                         </div>

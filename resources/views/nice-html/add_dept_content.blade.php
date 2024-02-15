@@ -45,12 +45,7 @@
             </div>
         </div>
     </header>
-    <div class="main_section new_shema">
-        {{-- @foreach ($user as $users)
-            <h4>
-                {{ $users->DepartmentName }}
-            </h4> --}}
-        {{-- @endforeach --}}
+    <div class="main_section new_shema">      
         <div class="container">
             <div class="card">
                 <div class="card-header">

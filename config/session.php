@@ -31,9 +31,8 @@ return [
     |
     */
 
-    'lifetime' => 20,
-    'lifetime' => env('SESSION_LIFETIME', 20),
-    // 'lifetime' => 10,
+    // 'lifetime' => 20,
+    'lifetime' => env('SESSION_LIFETIME', 15),    
 
     'expire_on_close' => true,
     'expired-session-redirect' => (env('form2')),

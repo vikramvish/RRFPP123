@@ -166,7 +166,7 @@
                                         <h2>{!! $user->Heading !!}</h2>
                                         <p>{!! $user->ShortDescription !!}
                                         </p>
-                                        <a onclick="location.href='{{ url('blogpage/' . $user->Slug) }}'"
+                                        <a onclick="location.href='{{ url('blog/' . $user->Slug) }}'"
                                             class="read_more">Read more</a>
                                     </div>
                                 </div>
@@ -221,8 +221,7 @@
                 <h2 class="main_title center">More Recent Causes</h2>
                 <div id="help" class="search_box">
                     <form action="">
-                        <input type="text" name="search" id="search" class="form-control"
-                            placeholder="Search Here For Causes ........">
+                        <input type="text" name="search" id="search" class="form-control" placeholder="Search Here For Causes ........">
                     </form>
                     @csrf
                     <div class="causes-grid" id="search-results">
@@ -234,9 +233,7 @@
                                     <div class="causes-content">
                                         <h3>{!! $user->Heading !!}</h3>
                                         <p>{!! strip_tags($user->ShortDescription) !!}</p>
-                                        <button
-                                            onclick="location.href='{{ url('paymentpage', Str::slug($user->Slug)) }}'"
-                                            id="donate">Donate Now</button>
+                                        <button onclick="location.href='{{ url('paymentpage', Str::slug($user->Slug)) }}'" id="donate">Donate Now</button>
                                     </div>
                                 </div>
                             </li>
@@ -253,19 +250,25 @@
     </footer>
 
     {{-- for live searching on input field --}}
-    <script>
-        $(document).ready(function() {
-            $("#search").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
-                $(".searchable").filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
 
-                // Show message if no results found
-                if ($(".searchable:visible").length == 0) {
-                    $("#search-results").html("<p>No results found.</p>");
+    <script>
+        var searchInput = document.getElementById('search');
+    
+        searchInput.addEventListener('keyup', function () {
+            var searchValue = searchInput.value.toLowerCase();
+            var items = document.getElementsByClassName('searchable');
+    
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                var heading = item.getElementsByTagName('h3')[0].innerText.toLowerCase();
+                var description = item.getElementsByTagName('p')[0].innerText.toLowerCase();
+    
+                if (heading.includes(searchValue) || description.includes(searchValue)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
                 }
-            });
+            }
         });
     </script>
     <script>

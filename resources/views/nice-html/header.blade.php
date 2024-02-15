@@ -12,11 +12,7 @@
                             class="menu_icon logout"><i class="bi bi-power"></i></span>Logout</a></li>
                 <li><a href="{{ url('website') }}" target="_blank" class="download"><span class="menu_icon"><i
                                 class="bi bi-globe2"></i></span>Donation Portal</a></li>
-                        {{-- <li><a href="{{ url('website#help') }}"
-                        onclick="return confirm('do you Want to switch to donation portal?')"
-                        target="_blank" class="donate"><span class="menu_icon"><i
-                                class="bi bi-heart-fill"></i></span>Donate
-                        Now</a></li> --}}
+                      
             </ul>
         </div>
     </div>

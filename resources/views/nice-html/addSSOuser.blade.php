@@ -65,9 +65,7 @@
                     <div class="form_row">
                         <div class="form_item full">
                             {{-- <label>SSO Id</label> --}}
-                            <div class="btnbox">
-                                {{-- <input type="text" name="id" class="form-control" placeholder="User SSO-ID"> --}}
-                                {{-- <button type="submit" class="btn btn-primary">Fetch</button> --}}
+                            <div class="btnbox">                               
                             </div>
                         </div>
                     </div>
@@ -102,7 +100,7 @@
                                 </select>
                             </div>
                         </div>
-
+                        <div class="form_row">
                         <div class="form-check">
                             <input data-onstyle="success" class="form-check-input" type="checkbox" value=""
                                 id="flexCheckChecked" checked>
@@ -110,35 +108,19 @@
                                 Status
                             </label>
                         </div>
-
-                        {{-- <input data-onstyle="success" class="form-check-input" type="checkbox" value=""
-                                id="flexCheckChecked" checked>
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Status
-                            </label> --}}
-
-                        {{-- <div class="form_row">
-                            <div class="form_item full">
-                                <label>Active</label>
-                                <input data-id="" class="toggle-class" type="checkbox" data-onstyle="success"
-                                    data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive"
-                                    checked>
-                            </div>
-                        </div> --}}
-                        <div class="btn_row">
-                            {{-- @if (session('role') == '1')                            
-                            <input type="submit" value="Create User" class="primary_btn">
-                        @elseif (session('role') == '2')
-                        <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="Not Autherized">
-                        <input type="submit" value="Create User" class="btn btn-secondary" onclick="alert('This button is disabled')" disabled>
-                    </span>
-                        @elseif (session('role') == '3')
-                            <!-- Button for condition 3 -->
-                            <input type="submit" value="Create User" class="primary_btn">
-                        @elseif (session('role') == '4')
-                            <!-- Button for condition 4 -->
-                            <input type="submit" value="Create User" class="primary_btn">
-                        @endif          --}}
+                        <div class="form_item">
+                            <label>Department</label>
+                            <select class="form-select" name="DepartmentId" id="DepartmentId">                              
+                                @foreach ($department as $departments)
+                                @if ($departments->IsActive == 1)
+                                    <option value="{{ $departments->DepartmentId }}">
+                                        {{ $departments->DepartmentName }}</option>
+                                        @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        </div>
+                        <div class="btn_row">                        
                         <input type="submit" value="Create User" class="primary_btn">
                             <a class="btn btn-primary" href="{{ url('SSOmaping') }}" role="button">Back</a>
                         </div>

@@ -226,7 +226,7 @@ $hasPermission = false;
         <div class="container">
             <div class="card">
                 <div class="row">
-
+                    @if(session('roleId') == 1)
                     <form action="{{ route('downloadReports') }}" method="GET">
                         @csrf
                         <div class="form-row">
@@ -249,10 +249,12 @@ $hasPermission = false;
                                     <option value="" {{ request('department')==='' ? 'selected' : '' }}>
                                         All Department</option>
                                     @foreach ($departments as $department)
+                                    @if ($department->IsActive == 1)
                                     <option value="{{ $department->DepartmentId }}" {{
                                         $selectedDepartmentId==$department->DepartmentId ? 'selected' : '' }}>
                                         {{ $department->DepartmentName }}
                                     </option>
+                                    @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -304,6 +306,82 @@ $hasPermission = false;
                                 </a></button>
                         </div>
                     </form>
+                    @elseif(session('roleId') == 2 || session('roleId') == 3 || session('roleId') == 4)
+                    <form action="{{ route('downloadReports') }}" method="GET">
+                        @csrf
+                        <div class="form-row">
+                            <div class="form_item">
+                                <label for="from_date">From Date:</label>
+                                <input type="date" class="form-control" id="from_date" name="from_date"
+                                    value="{{ request('from_date') }}">
+                            </div>
+                            <div class="form_item">
+                                <label for="to_date">To Date:</label>
+                                <input type="date" class="form-control" id="to_date" name="to_date"
+                                    value="{{ date('Y-m-d') }}">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form_item">
+                                <label for="department">Department:</label>
+                                <select id="department" class="form-select filter-select" name="department" value="{{ request('department') }}">
+                                    {{-- <option value="" {{ request('department') === '' ? 'selected' : '' }}>
+                                        All Department
+                                    </option> --}}
+                                    @foreach ($departments as $department)
+                                        @if ($department->IsActive == 1 && in_array($department->DepartmentId, $departmentIds))
+                                            <option value="{{ $department->DepartmentId }}" {{ $selectedDepartmentId == $department->DepartmentId ? 'selected' : '' }}>
+                                                {{ $department->DepartmentName }}
+                                            </option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form_item">
+                                <label for="scheme">Scheme:</label>
+                                <select id="scheme" class="form-select filter-select" name="scheme">
+                                    <option value="">All Scheme</option>
+                                    @forelse ($schemes as $scheme)
+                                    <option value="{{ $scheme->SchemeId }}">{{ $scheme->SchemeName }}</option>
+                                    @empty
+                                    <option value="">No Schemes Found</option>
+                                    @endforelse
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form_item">
+                                <label for="prn">Count</label>
+                                <select data-column="0" class="form-select filter-select" name="count" id="dropdown"
+                                    placeholder="Select Count">
+                                    <option value="all" {{ $selectedCount==='all' ? 'selected' : '' }}>All</option>
+                                    <option value="100" {{ $selectedCount==='100' ? 'selected' : '' }}>Top 100</option>
+                                    <option value="500" {{ $selectedCount==='500' ? 'selected' : '' }}>Top 500</option>
+                                </select>
+                            </div>
+                            <div class="form_item">
+                                <label for="department">Status:</label>
+                                <select class="form-select filter-select" name="STATUS" id="status">
+                                    {{-- <option value="">All</option> --}}
+                                    <option value="SUCCESS">SUCCESS</option>
+                                    <option value="FAILED">FAILED</option>
+                                    <option value="Pending">PENDING</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="btn">
+                            <button type="submit" name="summary" class="btn btn-primary">Download Summary</button>
+                            <button type="submit" name="detailed" class="btn btn-primary">Download detailed
+                                data</button>
+                            <button type="button" class="btn btn-primary">
+                                <a href="{{ url('download_reports') }}">Reset</span>
+                                </a>
+                            </button>
+                        </div>
+                    </form>
+
+                    @endif
+
 
                     @if ($results->isNotEmpty())
                     @if (isset($_GET['summary']))
@@ -438,7 +516,6 @@ $hasPermission = false;
                                 <th>Mobile</th>
                                 <th>Department</th>
                                 <th>Scheme</th>
-
                                 <th>Amount</th>
                                 <th>Status</th>
                                 <th>View</th>
@@ -456,20 +533,19 @@ $hasPermission = false;
                                 <td>{{ $result->scheme?->SchemeName }}</td>
 
                                 <td>{{ $result->AMOUNT }}</td>
-                                <td>
-                                    @if ($result->STATUS == 'SUCCESS')
+                               <td>
+                                @if ($result->STATUS == 'SUCCESS')
                                     <span style="font-weight: 700;">{{ $result->STATUS }}</span>
                                     <a href="{{ url('Pdf_Format?prn=' . $result->PRN) }}" target="_blank">
-                                        <i class="bi bi-file-earmark-pdf-fill" aria-hidden="true"
-                                            style="color: #2f2f74; font-size: larger;" data-bs-toggle="tooltip"
-                                            data-bs-placement="bottom" title="Download PDF"></i>
+                                        <i class="bi bi-file-earmark-pdf-fill" aria-hidden="true" style="color: #2f2f74; font-size: larger;"
+                                            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Download PDF"></i>
                                     </a>
-                                    @elseif ($result->STATUS == 'FAILED')
-                                    <span style="color: red; font-weight: 700;">{{ $result->STATUS }}</span>
-                                    @else
-                                    {{ $result->STATUS }}
-                                    @endif
-                                </td>
+                                @elseif ($result->STATUS == 'FAILED')
+                                <span style="color: red; font-weight: 700;">{{ $result->STATUS }}</span>
+                                @else
+                                {{ $result->STATUS }}
+                                @endif
+                            </td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal"
@@ -557,13 +633,6 @@ $hasPermission = false;
                             </div>
                         </div>
                         <div class="row">
-                            {{-- <div class="col">
-                                <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">PG Name:</label>
-                                    <input type="text" class="form-control" id="prn-field-7" readonly
-                                        value="{{ $pgNames[$result->PGName] ?? '' }}">
-                                </div>
-                            </div> --}}
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Request

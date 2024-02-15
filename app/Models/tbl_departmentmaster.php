@@ -20,4 +20,8 @@ class tbl_departmentmaster extends Model
         'CreatedAt',             
         'UpdatedAt',         
     ];
+    public function users()
+    {
+        return $this->belongsToMany(tbl_usermasters::class, 'tbl_departmentusers', 'DepartmentId', 'user_id');
+    }
 }
